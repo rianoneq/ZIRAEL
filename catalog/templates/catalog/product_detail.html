@@ -6,6 +6,9 @@
         <div class="item__images">
           <img src="{% if product.image %}../static/images/{{ product.image }}{% else %}../static/images/anon.png{% endif %}"
             alt="item_img">
+          {% for img in images %}
+            <img src="../static/images/{{ img.images }}" alt="" style="width: 40px;height:40px;">
+          {% endfor %}
         </div>
         <div class="item__text_data">
           <div class="item__text">{{ product.name }}

@@ -12,7 +12,7 @@ class Category(models.Model):
     ordering = ('name',)
     verbose_name = 'Категория'
     verbose_name_plural = 'Категории'
-
+    
   def __str__(self) -> str:
     return self.name
 
@@ -32,7 +32,7 @@ class Product(models.Model):
   height = models.DecimalField(max_digits=6, decimal_places=2, null=True)
   thickness = models.DecimalField(max_digits=6, decimal_places=2, null=True)
   weight = models.DecimalField(max_digits=6, decimal_places=2, null=True)
-  image = models.ImageField(blank=True)
+  image = models.FileField(blank=True)
   description = models.CharField(max_length=225, null=True)
   price = models.DecimalField(max_digits=10, decimal_places=2)
   stock = models.PositiveIntegerField()
@@ -42,9 +42,18 @@ class Product(models.Model):
 
   class Meta:
     ordering = ['-created']
+    verbose_name = 'Товар'
+    verbose_name_plural = 'Товары'
 
   def get_absolute_url(self):
     return reverse('item_detail_view', args=[str(self.slug)])
 
-  def __str__(self):
+  def __str__(self) -> str:
     return self.name
+
+class PostProductImage(models.Model):
+  prod = models.ForeignKey('Product', default=None, on_delete=models.CASCADE)
+  images = models.FileField()
+
+  def __str__(self):
+    return str(self.prod.id)

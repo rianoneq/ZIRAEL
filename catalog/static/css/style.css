@@ -180,6 +180,11 @@ img{
 .item__price{
   font-size: 23px;
 }
+.item__text>a{
+  display: flex;
+  align-items: center;
+  margin-left: 5px;
+}
 .item__text{
   display: flex;
   align-items: center;
@@ -196,6 +201,9 @@ img{
   font-size: 25px;
   /* max-width: 400px; */
   margin-left: 15px;
+}
+.item__text_data>table>tbody>tr>td:last-child{
+  padding-left: 10px;
 }
 .item__images>img{
   width: 100%;
