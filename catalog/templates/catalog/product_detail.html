@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="item_data">
+  <div class="top_bar_content">
+        <div class="item__images">
+          <img src="{% if product.image %}../static/images/{{ product.image }}{% else %}../static/images/anon.png{% endif %}"
+            alt="item_img">
+        </div>
+        <div class="item__text_data">
+          <div class="item__text">{{ product.name }}
+            {% if product.category.image %}
+            
+            <a href="{{ product.category.get_absolute_url }}"><img src="../static/images/{{ product.category.image }}" alt="cat_image" style="width: 30px;height:30px;"></a>
+            {% endif %}
+          </div>
+          <div class="item__price">{{ product.price }}₽</div>
+          <div class="item__description">{{ product.description }}
+            
+          </div>
+          <table>
+            <tbody>
+                <tr>
+                  <td>Материал</td>
+                  <td>&nbsp;{{ product.material }}</td>
+                </tr>
+                <tr>
+                  <td>Толщина</td>
+                  <td>&nbsp;{{ product.thickness }}см</td>
+                </tr>
+                <tr>
+                  <td>Ширина</td>
+                  <td>&nbsp;{{ product.width }}см</td>
+                </tr>
+                <tr>
+                  <td>Длина</td>
+                  <td>&nbsp;{{ product.height }}см</td>
+                </tr>
+                <tr>
+                  <td>Вес</td>
+                  <td>&nbsp;{{ product.weight }}кг</td>
+                </tr>
+        
+        
+            </tbody>
+          </table>
+        </div>
+  </div> 
+
+
+</div>
+{% endblock %}

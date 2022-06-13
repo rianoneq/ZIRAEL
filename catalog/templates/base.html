@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Main page</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="icon" type="image/x-icon" href="{% static 'images/ava2ver.jpg' %}">
+</head>
+
+<body style="padding-top: 10px;padding-bottom: 10px;">
+  
+  <div class="wrapper">
+    <header>
+      <nav class="header">
+        <div class="ava">
+          <a href="/"><img src="{% static 'images/ava2ver.jpg' %}" alt="ava" class="ava_main"></a>
+        </div>
+        <ul>
+          <a href="/"><li>MAIN</li></a>
+          <a href="/catalog"><li>CATALOG</li></a>
+          <a href="/categories"><li>CATEGORIES</li></a>
+          <a href="/contacts"><li>CONTACTS</li></a>
+        </ul>
+      </nav>
+    </header> 
+    {% block content %}
+    {% endblock %}
+    {% block pagination %}
+      {% if is_paginated %}
+        <div class="pagination">
+          <span class="page-links">
+            {% if page_obj.has_previous %}
+              <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+            <span class="page-current">
+              Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+            {% if page_obj.has_next %}
+              <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">next</a>
+            {% endif %}
+          </span>
+        </div>
+      {% endif %}
+    {% endblock %}
+  </div>
+
+
+  <script src="{% static 'js/script.js' %}"></script>
+</body>
+
+</html>

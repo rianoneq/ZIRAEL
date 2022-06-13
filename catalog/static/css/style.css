@@ -1,0 +1,206 @@
+
+/* main font init */
+@font-face {
+  font-family: 'custom';
+  src: url('../fonts/ofont.ru_Vinque_Rg.ttf');
+}
+
+/* полоса прокрутки (скроллбар) */
+::-webkit-scrollbar {
+  width: 0px;
+  /* ширина для вертикального скролла */
+  height: 0px;
+  /* высота для горизонтального скролла */
+  background-color: #000000;
+}
+
+/* ползунок скроллбара */
+::-webkit-scrollbar-thumb {
+  background-color: var(--officer-site-color);
+  border-radius: 9em;
+  box-shadow: inset 1px 1px 10px #f3faf7;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #253861;
+}
+
+/* tag styles */
+*{
+  box-sizing: border-box;
+}
+body{
+  --general-site-color: #adff2f;
+  --officer-site-color: rgb(0, 152, 247);
+  --main-description-color: gray;
+  font-family: 'custom';
+  background-color: black;
+  color: white;
+  padding: 0;
+  margin: 0;
+}
+
+.wrapper{
+  width: 70%;
+  margin: auto;
+}
+a{
+  text-decoration: none;
+  color: white;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+img{
+  object-fit: cover;
+}
+
+/* header styles */
+.ava_main {
+  width: 50px;
+  height: 50px;
+}
+.header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header>ul{
+  display: flex;
+}
+.header>ul>a{
+  margin-left: 15px;
+  transition: .15s;
+  user-select: none;
+}
+.header>ul>a:hover{
+  color: var(--general-site-color);
+}
+
+/* categoriers page styles */
+.categories_page{
+  margin-top: 15px;
+}
+.no_cat{
+  font-size: 25px;
+  color: var(--general-site-color);
+}
+.cat_title{
+  font-size: 30px;
+  color: var(--general-site-color);
+}
+.cat_link{
+  margin-bottom: 10px;
+}
+.cat_link>a{
+  display: flex;
+  align-items: center;
+  font-size: 25px;
+}
+.cat_text{
+  margin-left: 5px;
+}
+.cat_link>a:hover{
+  color: var(--officer-site-color);
+}
+
+/* category detail styles */
+.cat_item_data{
+  margin-top: 15px;
+}
+.cat_info{
+  display: flex;
+  align-items: center;
+}
+.back{
+  font-size: 25px;
+  margin-right: 5px;
+  color: var(--officer-site-color);
+}
+.cat_name{
+  font-size: 25px;
+  color: var(--general-site-color);
+}
+.cat_item{
+  font-size: 22px;
+}
+.cat_item:hover{
+  color: var(--officer-site-color);
+}
+
+/* product card styles in /catalog page */
+.product_descr{
+  margin-top: 5px;
+  font-size: 15px;
+  color: var(--main-description-color);
+}
+.catalog{
+  justify-content: space-evenly;
+  margin-top: 50px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.product_price{
+  font-size: 15px;
+}
+.product_name{
+  font-size: 20px;
+}
+.card{
+  cursor: pointer;
+  border: 1px solid var(--general-site-color);
+  width: 30%;
+  max-width: 30%;
+  height: 300px;
+  margin-left: 15px;
+  margin-bottom: 15px;
+}
+.card_data{
+  padding: 5px;
+}
+.card>img{
+  width: 100px;
+}
+.card>img{
+  height: 60%;
+  width: 100%;
+}
+
+/* item detail styles */
+.item__images{
+  height: auto;
+  width: 50%;
+}
+.top_bar_content{
+  /* justify-content: space-between; */
+  margin-top: 35px;
+  display: flex;
+}
+.item__price{
+  font-size: 23px;
+}
+.item__text{
+  display: flex;
+  align-items: center;
+  color: var(--general-site-color);
+  font-size: 28px;
+}
+.item__description{
+  color: var(--main-description-color);
+  font-size: 20px;
+  margin-top: 15px;
+}
+.item__text_data{
+  max-width: 40%;
+  font-size: 25px;
+  /* max-width: 400px; */
+  margin-left: 15px;
+}
+.item__images>img{
+  width: 100%;
+  max-width: 425px;
+}
+.item__text_data>table{
+  margin-top: 15px;
+}

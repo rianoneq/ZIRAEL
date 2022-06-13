@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="cat_item_data">
+  <div class="cat_info">
+    <a href="/categories" class="back"><Назад</a>
+    <div class="cat_name">{{ category.name }}</div>
+    {% if category.image %}
+    
+    <img src="../static/images/{{ category.image }}" alt="cat_image" style="width: 30px;height:30px;margin-left: 5px;">
+    {% endif %}
+  </div>
+  <ul class="cat_items">
+    {% if category.product_set.all %}
+      {% for cat_item in category.product_set.all %}
+      
+      
+        <li><a href="{{ cat_item.get_absolute_url }}" class="cat_item">{{ cat_item }}</a></li>
+      
+      {% endfor %}
+    {% else %}
+    
+      <div class="no_cat" style="color:white;">
+        No items in this cat for now
+      </div>
+    {% endif %}
+  </ul>
+</div>  
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="categories_page">
+  <div class="cat_title">
+    Categories:
+  </div>
+  {% if cats %}
+    <div class="cat_list">
+      <ul>
+        {% for cat in cats %}
+          <li class="cat_link">
+            <a href="{{ cat.get_absolute_url }}">
+              {% if cat.image %}
+                
+                <img src="../static/images/{{ cat.image }}" alt="cat_image" style="width: 30px;height:30px;">
+              {% endif %}
+              <div class="cat_text">
+                {{ cat }}
+              </div>
+            </a>
+          </li>
+        {% endfor %}
+        </ul>
+    </div>
+  {% else %}
+    <div class="no_cat">
+      No categories :(
+    </div>
+  {% endif %}
+</div>
+{% endblock %}
