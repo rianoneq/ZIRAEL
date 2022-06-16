@@ -1,2 +1,2 @@
 # ZIRAEL
-my first django ecommerce
+✔my first django ecommerce

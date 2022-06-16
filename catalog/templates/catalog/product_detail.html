@@ -1,20 +1,58 @@
 {% extends 'base.html' %}
 
+{% load static %}
 {% block content %}
 <div class="item_data">
   <div class="top_bar_content">
         <div class="item__images">
-          <img src="{% if product.image %}../static/images/{{ product.image }}{% else %}../static/images/anon.png{% endif %}"
+          <!-- <img
+            src="{% if product.image %}../static/images/product_images/{{ product.image }}{% else %}../static/images/site_images/anon.png{% endif %}"
             alt="item_img">
-          {% for img in images %}
-            <img src="../static/images/{{ img.images }}" alt="" style="width: 40px;height:40px;">
-          {% endfor %}
+          <div class="img_queue">
+            {% for img in images %}
+              <img src="../static/images/{{ img.images }}" alt="" style="width: 40px;height:40px;">
+            {% endfor %}
+          </div> -->
+
+          <!-- <section class="item__images">
+                    <img src="{% if product.image %}../static/images/product_images/{{ product.image }}{% else %}../static/images/anon.png{% endif %}" alt=""
+                      class="current-image">
+                      <span class="arrow arrow-left"> Prev </span>
+                    <ul class="next-list">
+                      <img
+                        src="{% if product.image %}../static/images/product_images/{{ product.image }}{% else %}../static/images/anon.png{% endif %}"
+                        alt="" class="image-of-list current-image-list">
+                      {% for img in images %}
+                      
+                        <li>
+                          <img src="../static/images/product_images/{{ img.images }}" alt="" class="image-of-list current-image-list">
+                        </li>
+                      {% endfor %}
+                        <span class="arrow arrow-right"> Next </span>
+                    </ul>
+                  </section> -->
+                  <ul id="product_slider">
+                      <li data-thumb="{% if product.image %}../static/images/{{ product.image }}{% else %}../static/images/site_images/anon.png{% endif %}">
+                        <img src="{% if product.image %}../static/images/{{ product.image }}{% else %}../static/images/site_images/anon.png{% endif %}"
+                          alt="item_img"
+                          >
+                      </li>
+                      {% for img in images %}
+                        <li class="slider_" data-thumb="/static/images/{{ img.images }}">
+                            <!-- style="width: 40px;height:40px;" -->
+                          <img src="/static/images/{{ img.images }}" alt="">
+
+                          <!-- <div style="background-image: url('../static/images/{{ img.images }}');"></div> -->
+                        </li>
+                      {% endfor %}
+                    </ul>
+            
         </div>
         <div class="item__text_data">
           <div class="item__text">{{ product.name }}
             {% if product.category.image %}
             
-            <a href="{{ product.category.get_absolute_url }}"><img src="../static/images/{{ product.category.image }}" alt="cat_image" style="width: 30px;height:30px;"></a>
+            <a href="{{ product.category.get_absolute_url }}"><img src="../static/images/cat_images/{{ product.category.image }}" alt="cat_image" style="width: 30px;height:30px;"></a>
             {% endif %}
           </div>
           <div class="item__price">{{ product.price }}₽</div>
@@ -49,7 +87,7 @@
           </table>
         </div>
   </div> 
-
+  <script src="{% static 'js/slider.js' %}"></script>
 
 </div>
 {% endblock %}

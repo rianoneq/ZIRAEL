@@ -1,3 +1,4 @@
+from __future__ import print_function
 from turtle import width
 from django.db import models
 from django.urls import reverse
@@ -20,8 +21,15 @@ class Category(models.Model):
     return reverse('category_detail_view', args=[str(self.slug)])
 
 
+def get_uplaod_file_name(slug):
+  return f'product_images/{slug}'
 
 class Product(models.Model):
+  
+  def upload_to(self, *args):
+    image_path = f'product_images/{self.slug}_/{args[0]}'
+    return image_path
+
   category = models.ForeignKey(
       'Category', on_delete=models.SET_NULL, null=True)
   name = models.CharField(max_length=200, db_index=True)
@@ -32,8 +40,8 @@ class Product(models.Model):
   height = models.DecimalField(max_digits=6, decimal_places=2, null=True)
   thickness = models.DecimalField(max_digits=6, decimal_places=2, null=True)
   weight = models.DecimalField(max_digits=6, decimal_places=2, null=True)
-  image = models.FileField(blank=True)
-  description = models.CharField(max_length=225, null=True)
+  image = models.FileField(blank=True, upload_to=upload_to)
+  description = models.CharField(max_length=125, null=True)
   price = models.DecimalField(max_digits=10, decimal_places=2)
   stock = models.PositiveIntegerField()
   available = models.BooleanField(default=True)
@@ -48,12 +56,19 @@ class Product(models.Model):
   def get_absolute_url(self):
     return reverse('item_detail_view', args=[str(self.slug)])
 
+
+
   def __str__(self) -> str:
     return self.name
 
 class PostProductImage(models.Model):
-  prod = models.ForeignKey('Product', default=None, on_delete=models.CASCADE)
-  images = models.FileField()
+
+  def upload_to(self, *args):
+    image_path = f'product_images/{self.prod.slug}_/{args[0]}'
+    return image_path
+
+  prod = models.ForeignKey(Product, default=None, on_delete=models.CASCADE)
+  images = models.FileField(upload_to=upload_to)
 
   def __str__(self):
-    return str(self.prod.id)
+    return str(self.prod.slug)

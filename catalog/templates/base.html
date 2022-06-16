@@ -6,9 +6,12 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Main page</title>
+  <title>Zirael</title>
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
-  <link rel="icon" type="image/x-icon" href="{% static 'images/ava2ver.jpg' %}">
+  <link rel="icon" type="image/x-icon" href="{% static 'images/site_images/ava2ver.jpg' %}">
+  <link type="text/css" rel="stylesheet" href="{% static 'css/lightslider.css' %}" />
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script src="{% static 'js/lightslider.js' %}"></script>
 </head>
 
 <body style="padding-top: 10px;padding-bottom: 10px;">
@@ -17,7 +20,7 @@
     <header>
       <nav class="header">
         <div class="ava">
-          <a href="/"><img src="{% static 'images/ava2ver.jpg' %}" alt="ava" class="ava_main"></a>
+          <a href="/"><img src="{% static 'images/site_images/main_ava_with_text2ver.jpg' %}" alt="ava" class="ava_main"></a>
         </div>
         <ul>
           <a href="/"><li>MAIN</li></a>
@@ -48,7 +51,7 @@
     {% endblock %}
   </div>
 
-
+ 
   <script src="{% static 'js/script.js' %}"></script>
 </body>
 
