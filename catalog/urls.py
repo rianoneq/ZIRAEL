@@ -17,11 +17,6 @@ urlpatterns += [
 ]
 
 urlpatterns += [
-    re_path(r'^contacts/$', views.contacts_page,
-            name='contacts_page'),
-]
-
-urlpatterns += [
     re_path(r'^categories/$', views.RenderCategories.as_view(),
             name='categories_page'),
 ]

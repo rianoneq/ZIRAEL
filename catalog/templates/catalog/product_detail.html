@@ -2,57 +2,54 @@
 
 {% load static %}
 {% block content %}
+<link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
 <div class="item_data">
   <div class="top_bar_content">
-        <div class="item__images">
-          <!-- <img
-            src="{% if product.image %}../static/images/product_images/{{ product.image }}{% else %}../static/images/site_images/anon.png{% endif %}"
-            alt="item_img">
-          <div class="img_queue">
-            {% for img in images %}
-              <img src="../static/images/{{ img.images }}" alt="" style="width: 40px;height:40px;">
-            {% endfor %}
-          </div> -->
+          
 
-          <!-- <section class="item__images">
-                    <img src="{% if product.image %}../static/images/product_images/{{ product.image }}{% else %}../static/images/anon.png{% endif %}" alt=""
-                      class="current-image">
-                      <span class="arrow arrow-left"> Prev </span>
-                    <ul class="next-list">
-                      <img
-                        src="{% if product.image %}../static/images/product_images/{{ product.image }}{% else %}../static/images/anon.png{% endif %}"
-                        alt="" class="image-of-list current-image-list">
-                      {% for img in images %}
-                      
-                        <li>
-                          <img src="../static/images/product_images/{{ img.images }}" alt="" class="image-of-list current-image-list">
-                        </li>
-                      {% endfor %}
-                        <span class="arrow arrow-right"> Next </span>
-                    </ul>
-                  </section> -->
-                  <ul id="product_slider">
-                      <li data-thumb="{% if product.image %}../static/images/{{ product.image }}{% else %}../static/images/site_images/anon.png{% endif %}">
-                        <img src="{% if product.image %}../static/images/{{ product.image }}{% else %}../static/images/site_images/anon.png{% endif %}"
-                          alt="item_img"
-                          >
-                      </li>
-                      {% for img in images %}
-                        <li class="slider_" data-thumb="/static/images/{{ img.images }}">
-                            <!-- style="width: 40px;height:40px;" -->
-                          <img src="/static/images/{{ img.images }}" alt="">
-
-                          <!-- <div style="background-image: url('../static/images/{{ img.images }}');"></div> -->
-                        </li>
-                      {% endfor %}
-                    </ul>
+           <div class="wrap_slider" style="width: 100%; height:100%">
+            <div class="swiper mySwiper2">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                  <img
+                    src="{% if product.image %}../static/images/{{ product.image }}{% else %}../static/images/site_images/anon.png{% endif %}"
+                    alt="item_img" ondrag="return false" ondragdrop="return false" ondragstart="return false">
+                </div>
+                {% for img in images %}
+                  <div class="swiper-slide">
+                    <img src="../static/images/{{ img.images }}" alt="" ondrag="return false" ondragdrop="return false" ondragstart="return false">
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+            <div thumbsSlider="" class="swiper mySwiper">
+              <div class="swiper-wrapper swaper_wrapper2">
+                <div class="swiper-slide">
+                  <img
+                    src="{% if product.image %}../static/images/{{ product.image }}{% else %}../static/images/site_images/anon.png{% endif %}"
+                    alt="item_img" style="max-width: 50px;max-height:50px;">
+                </div>
+                {% for img in images %}
+                <div class="swiper-slide">
+                  <img src="../static/images/{{ img.images }}" alt="" style="max-width: 50px;max-height:50px;">
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+           </div>
+       
             
-        </div>
         <div class="item__text_data">
           <div class="item__text">{{ product.name }}
             {% if product.category.image %}
             
-            <a href="{{ product.category.get_absolute_url }}"><img src="../static/images/cat_images/{{ product.category.image }}" alt="cat_image" style="width: 30px;height:30px;"></a>
+            <a href="{{ product.category.get_absolute_url }}" style="position: relative;" class='cat_link' title="Категории">
+              <img src="../static/images/cat_images/{{ product.category.image }}"
+               alt="cat_image"
+               style="width: 30px;height:30px;"
+               class="cat_img">
+               <div class="cat_tooltip">Категория</div>
+            </a>
             {% endif %}
           </div>
           <div class="item__price">{{ product.price }}₽</div>
@@ -63,23 +60,23 @@
             <tbody>
                 <tr>
                   <td>Материал</td>
-                  <td>&nbsp;{{ product.material }}</td>
+                  <td class="item_chars">&nbsp;{{ product.material }}</td>
                 </tr>
                 <tr>
                   <td>Толщина</td>
-                  <td>&nbsp;{{ product.thickness }}см</td>
+                  <td class="item_chars">&nbsp;{{ product.thickness }}<div class="si" style="color: var(--officer-site-color);">см</div></td>
                 </tr>
                 <tr>
                   <td>Ширина</td>
-                  <td>&nbsp;{{ product.width }}см</td>
+                  <td class="item_chars">&nbsp;{{ product.width }}<div class="si" style="color: var(--officer-site-color);">см</div></td>
                 </tr>
                 <tr>
                   <td>Длина</td>
-                  <td>&nbsp;{{ product.height }}см</td>
+                  <td class="item_chars">&nbsp;{{ product.height }}<div class="si" style="color: var(--officer-site-color);">см</div></td>
                 </tr>
                 <tr>
                   <td>Вес</td>
-                  <td>&nbsp;{{ product.weight }}кг</td>
+                  <td class="item_chars">&nbsp;{{ product.weight }}<div class="si" style="color: var(--officer-site-color);">кг</div></td>
                 </tr>
         
         
@@ -87,7 +84,11 @@
           </table>
         </div>
   </div> 
-  <script src="{% static 'js/slider.js' %}"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="{% static 'js/product_scripts.js' %}" type="module">
+    
+  </script>
+  <!-- <script src="{% static 'js/slider.js' %}"></script> -->
 
 </div>
 {% endblock %}

@@ -1,5 +1,6 @@
 let card_description = document.querySelectorAll('.product_descr')
 let card_name = document.querySelectorAll('.product_name')
+let images = document.querySelectorAll('img')
 
 card_description.forEach(text => {
   let max_length = 0

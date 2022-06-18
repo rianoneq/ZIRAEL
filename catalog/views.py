@@ -7,12 +7,7 @@ def index_page(request):
   return render(
     request,
     'main.html',
-  )
-
-def contacts_page(request):
-  return render(
-    request,
-    'contacts.html',
+    {'page_title': 'Главная'}
   )
 
 
@@ -25,10 +20,17 @@ class RenderCategories(generic.ListView):
     context = super(RenderCategories, self).get_context_data(**kwargs)
     # Добавляем новую переменную к контексту и инициализируем её некоторым значением
     context['cats'] = context['object_list']
+    context['page_title'] = 'Категории'
     return context
 
 class CategoryDetailView(generic.DetailView):
   model = Category
+
+  def get_context_data(self, **kwargs):
+
+    context = super(CategoryDetailView, self).get_context_data(**kwargs)
+    context['page_title'] = str(context['object']) + ' | подробности о категории'
+    return context
 
 class ItemDetailView(generic.DetailView):
   model = Product
@@ -38,9 +40,10 @@ class ItemDetailView(generic.DetailView):
     product_id = prod_[0].id
     photos = PostProductImage.objects.filter(prod=product_id)
 
-    # В первую очередь получаем базовую реализацию контекста
     context = super(ItemDetailView, self).get_context_data(**kwargs)
-    # Добавляем новую переменную к контексту и инициализируем её некоторым значением
+
+
+    context['page_title'] = str(context['object']) + ' | карточка товара'
     context['images'] = photos
     return context
 
@@ -51,9 +54,9 @@ class RenderCatalog(generic.ListView):
 
   def get_context_data(self, **kwargs):
   
-    # В первую очередь получаем базовую реализацию контекста
     context = super(RenderCatalog, self).get_context_data(**kwargs)
-    # Добавляем новую переменную к контексту и инициализируем её некоторым значением
+
     context['products'] = context['object_list']
+    context['page_title'] = 'Каталог'
     return context
 
