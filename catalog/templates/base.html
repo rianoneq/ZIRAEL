@@ -12,7 +12,7 @@
   <link type="text/css" rel="stylesheet" href="{% static 'css/lightslider.css' %}" />
   <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-  <script src="{% static 'js/lightslider.js' %}"></script>
+
 </head>
 
 <body style="padding-top: 10px;padding-bottom: 10px;">
@@ -27,7 +27,14 @@
           <a href="/"><li>MAIN</li></a>
           <a href="/catalog"><li>CATALOG</li></a>
           <a href="/categories"><li>CATEGORIES</li></a>
-          <a href="/contacts"><li>CONTACTS</li></a>
+          {% with total_items=cart|length %}
+            <a href="/cart" style="position: relative;"><li>CART</li>
+              <div class="cart_total">{{ total_items }}</div>
+              </a>
+          {% endwith %}
+              <!-- intrestiong func, само подставляет окончание в зависимости от числа -->
+              <!-- {{ total_items|pluralize }} -->
+              <!-- {{ cart.get_total_price }}₽ -->
         </ul>
       </nav>
     </header> 

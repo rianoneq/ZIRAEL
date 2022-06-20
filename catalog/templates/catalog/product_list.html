@@ -5,7 +5,7 @@
   <div class="catalog">
     {% for product in products %}
       <a href="{{ product.get_absolute_url }}" class="card">
-        <img src="{% if product.image %}../static/images/{{ product.image }}{% else %}../static/images/site_images/anon.png{% endif %}"
+        <img src="{% if product.image %}/static/images/{{ product.image }}{% else %}/static/images/site_images/anon.png{% endif %}"
           alt="img_card">
           <div class="card_data">
             <div class="product_name">

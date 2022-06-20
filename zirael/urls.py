@@ -29,11 +29,9 @@ urlpatterns = [
 urlpatterns += [
     re_path('', include('catalog.urls')),
 ]
-
-# urlpatterns += [
-#     re_path('^$', RedirectView.as_view(url='')),
-# ]
-
+urlpatterns += [
+  re_path(r'^cart/', include(('cart.urls', 'cart'), namespace='cart')),
+]
 
 urlpatterns += static(settings.STATIC_URL,
                       document_root=settings.STATIC_ROOT)

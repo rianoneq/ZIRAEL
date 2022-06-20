@@ -12,12 +12,12 @@
               <div class="swiper-wrapper">
                 <div class="swiper-slide">
                   <img
-                    src="{% if product.image %}../static/images/{{ product.image }}{% else %}../static/images/site_images/anon.png{% endif %}"
+                    src="{% if product.image %}/static/images/{{ product.image }}{% else %}../static/images/site_images/anon.png{% endif %}"
                     alt="item_img" ondrag="return false" ondragdrop="return false" ondragstart="return false">
                 </div>
                 {% for img in images %}
                   <div class="swiper-slide">
-                    <img src="../static/images/{{ img.images }}" alt="" ondrag="return false" ondragdrop="return false" ondragstart="return false">
+                    <img src="/static/images/{{ img.images }}" alt="" ondrag="return false" ondragdrop="return false" ondragstart="return false">
                   </div>
                 {% endfor %}
               </div>
@@ -26,12 +26,12 @@
               <div class="swiper-wrapper swaper_wrapper2">
                 <div class="swiper-slide">
                   <img
-                    src="{% if product.image %}../static/images/{{ product.image }}{% else %}../static/images/site_images/anon.png{% endif %}"
+                    src="{% if product.image %}/static/images/{{ product.image }}{% else %}/static/images/site_images/anon.png{% endif %}"
                     alt="item_img" style="max-width: 50px;max-height:50px;">
                 </div>
                 {% for img in images %}
                 <div class="swiper-slide">
-                  <img src="../static/images/{{ img.images }}" alt="" style="max-width: 50px;max-height:50px;">
+                  <img src="/static/images/{{ img.images }}" alt="" style="max-width: 50px;max-height:50px;">
                 </div>
                 {% endfor %}
               </div>
@@ -46,7 +46,7 @@
             <a href="{{ product.category.get_absolute_url }}" style="position: relative;" class='cat_link' title="Категории">
               <img src="../static/images/cat_images/{{ product.category.image }}"
                alt="cat_image"
-               style="width: 30px;height:30px;"
+               style="width: 40px;height:40px;"
                class="cat_img">
                <div class="cat_tooltip">Категория</div>
             </a>
@@ -82,8 +82,16 @@
         
             </tbody>
           </table>
+          
+          <form action="{% url "cart:cart_add" product.slug %}" method="post">
+            {{ cart_product_form }}
+            {% csrf_token %}
+            <input data-slug="{{ product.slug }}" type="submit" id="add_product_to_cart_btn" value="Add to cart">
+          </form>
+
         </div>
   </div> 
+  
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="{% static 'js/product_scripts.js' %}" type="module">
     

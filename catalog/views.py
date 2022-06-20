@@ -1,6 +1,7 @@
 from audioop import reverse
 from django.shortcuts import render
 from .models import Category, Product, PostProductImage
+from cart.forms import CartAddProductForm
 from django.views import generic
 
 def index_page(request):
@@ -44,6 +45,8 @@ class ItemDetailView(generic.DetailView):
 
 
     context['page_title'] = str(context['object']) + ' | карточка товара'
+    context['cart_product_form'] = CartAddProductForm()
+    
     context['images'] = photos
     return context
 
