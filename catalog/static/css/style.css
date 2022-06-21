@@ -181,7 +181,7 @@ img{
 /* product card styles in /catalog page */
 .product_descr{
   margin-top: 5px;
-  font-size: 15px;
+  font-size: 16.5px;
   color: var(--main-description-color);
 }
 .catalog{
@@ -191,17 +191,17 @@ img{
   flex-wrap: wrap;
 }
 .product_price{
-  font-size: 15px;
+  font-size: 18px;
 }
 .product_name{
-  font-size: 20px;
+  font-size: 25px;
 }
 .card{
   cursor: pointer;
   border: 1px solid var(--general-site-color);
   width: 30%;
   max-width: 30%;
-  height: 300px;
+  height: 320px;
   margin-left: 15px;
   margin-bottom: 15px;
 }
