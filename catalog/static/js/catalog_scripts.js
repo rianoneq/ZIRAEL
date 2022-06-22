@@ -2,7 +2,6 @@ let card_description = document.querySelectorAll('.product_descr')
 let card_name = document.querySelectorAll('.product_name')
 let images = document.querySelectorAll('img')
 
-//control lenght description of product in catalog
 card_description.forEach(text => {
   let max_length = 0
   if (window.innerWidth < 320) {
@@ -32,7 +31,6 @@ card_description.forEach(text => {
   
   if (text.innerHTML.trim().length > max_length) {
     let cutten_text = text.innerHTML.trim().slice(0,[max_length]);
-    //console.log(cutten_text)
     text.innerHTML = cutten_text + '...';
   }
 });
@@ -68,7 +66,6 @@ card_name.forEach(text => {
   console.log(max_length, text.innerHTML.length, text.innerHTML)
   if (text.innerHTML.trim().length > max_length) {
     let cutten_text = text.innerHTML.trim().slice(0,[max_length]);
-    console.log(cutten_text)
     text.innerHTML = cutten_text.trim() + '...';
   }
 });

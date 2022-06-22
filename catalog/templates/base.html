@@ -45,13 +45,21 @@
         <div class="pagination">
           <span class="page-links">
             {% if page_obj.has_previous %}
-              <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">previous</a>
+              <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">PREV</a>
             {% endif %}
-            <span class="page-current">
+            <span class="page-current"style="display: flex;">
+              <!-- {% for n in page_obj.paginator.page_range %}
+                <div class="pag-objqw">
+                  {{n}}
+                  <div class="" style="width: 20px;height:20px;background-color: blue;border-radius: 50%;margin-right: 10px;"></div>
+                    
+                  </a>
+                </div>
+              {% endfor %} -->
               Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
             </span>
             {% if page_obj.has_next %}
-              <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">next</a>
+              <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">NEXT</a>
             {% endif %}
           </span>
         </div>
@@ -60,7 +68,7 @@
   </div>
 
  
-  <script src="{% static 'js/script.js' %}"></script>
+  <!-- <script src="{% static 'js/script.js' %}"></script> -->
 </body>
 
 </html>

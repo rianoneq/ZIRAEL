@@ -5,18 +5,20 @@ from .cart import Cart
 from .forms import CartAddProductForm
 
 
-@require_POST
-def cart_add(request, product_slug):
+# @require_POST
+def cart_add(request, product_slug, quantity):
   cart = Cart(request)
 
   product = get_object_or_404(Product, slug=product_slug)
-  form = CartAddProductForm(request.POST)
-  if form.is_valid():
-    cd = form.cleaned_data
-    cart.add(product=product,
-              quantity=cd['quantity'],
-              update_quantity=cd['update'])
-  return redirect(f'/catalog/{product.slug}')
+  total_count = cart.__len__
+  quantity = int(quantity)
+  
+  cart.add(product=product,
+            quantity=quantity,#cd['quantity']
+            update_quantity=False)#cd['update']
+  
+
+  return render(request, 'cart/count.html', {'total_count': total_count})
 
 def cart_remove(request, product_slug):
   cart = Cart(request)
