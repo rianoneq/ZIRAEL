@@ -24,11 +24,11 @@
           <a href="/"><img src="{% static 'images/site_images/main_ava_with_text2ver.jpg' %}" alt="ava" class="ava_main"></a>
         </div>
         <ul>
-          <a href="/"><li>MAIN</li></a>
-          <a href="/catalog"><li>CATALOG</li></a>
-          <a href="/categories"><li>CATEGORIES</li></a>
+          <a href="/"><li>ГЛАВНАЯ</li></a>
+          <a href="/catalog"><li>КАТАЛОГ</li></a>
+          <a href="/categories"><li>КАТЕГОРИИ</li></a>
           {% with total_items=cart|length %}
-            <a href="/cart" style="position: relative;"><li>CART</li>
+            <a href="/cart" style="position: relative;"><li>КОРЗИНА</li>
               <div class="cart_total">{{ total_items }}</div>
               </a>
           {% endwith %}
@@ -48,14 +48,20 @@
               <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">PREV</a>
             {% endif %}
             <span class="page-current"style="display: flex;">
-              <!-- {% for n in page_obj.paginator.page_range %}
+              {% for n in page_obj.paginator.page_range %}
                 <div class="pag-objqw">
-                  {{n}}
-                  <div class="" style="width: 20px;height:20px;background-color: blue;border-radius: 50%;margin-right: 10px;"></div>
                     
+                  <a href="?page={{ n }}">
+                    {% if n == page_obj.number %}
+                    <div class="" style="width: 20px;height:20px;background-color: red;border-radius: 50%;margin-right: 10px;"></div>
+                    
+                    {% else %}
+                    <div class="" style="width: 20px;height:20px;background-color: blue;border-radius: 50%;margin-right: 10px;"></div>
+                    {% endif %}
+
                   </a>
                 </div>
-              {% endfor %} -->
+              {% endfor %}
               Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
             </span>
             {% if page_obj.has_next %}

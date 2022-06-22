@@ -1,45 +1,55 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<h1>Your shopping cart</h1>
+<h1 style="color: var(--general-site-color);">Корзина товаров</h1>
 <table class="cart">
   <thead>
     <tr>
-      <th>Image</th>
-      <th>Product</th>
-      <th>Quantity</th>
-      <th>Remove</th>
-      <th>Unit price</th>
-      <th>Price</th>
+      <th>Пикча</th>
+      <th>Товар</th>
+      <th>Количество</th>
+      <th>Общая цена</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
     {% for item in cart %}
     {% with product=item.product %}
-    <tr>
+    <tr class="cart_product" style="vertical-align: middle; ">
       <td>
         <a href="{{ product.get_absolute_url }}">
-          <img src="{% if product.image %}/static/images/{{ product.image }}{% else %}/static/images/site_images/anon.png{% endif %}"
-               style="height: 50px;width:50px;">
+          <img
+            src="{% if product.image %}/static/images/{{ product.image }}{% else %}/static/images/site_images/anon.png{% endif %}"
+            style="height: 50px;width:50px;">
         </a>
       </td>
       <td>{{ product.name }}</td>
       <td>{{ item.quantity }}</td>
-      <td><a href="{% url "cart:cart_remove" product.slug%}">Remove</a></td>
-      <td class="num">{{ item.price }}₽</td>
-      <td class="num">{{ item.total_price }}₽</td>
+      <!-- <td class="num" >{{ item.price }}<div class="currency"
+        style="color:var(--officer-site-color);">₽</div>
+      </td> -->
+      <td class="num">{{ item.total_price }}₽
+        <!-- <div class="currency" style="color:var(--officer-site-color);">₽</div> -->
+      </td>
+      <td><a data-product-slug="{{ product.slug }}" class="remove_cart_product">
+        <img src="{% static 'images/site_images/delete_item_cross.svg' %}" alt="delete_product"
+             style="width: 40px;height:40px">
+      </a></td>
     </tr>
     {% endwith %}
     {% endfor %}
-    <tr class="total">
+    <tr class="total" style="margin-top: 20px;">
       <td>Total</td>
-      <td colspan="4"></td>
-      <td class="num">{{ cart.get_total_price }}₽</td>
+      <td class="total_price" style="display: flex;">{{ cart.get_total_price }}<div class="currency"
+          style="color:var(--officer-site-color);">₽</div>
+      </td>
     </tr>
   </tbody>
 </table>
-<p class="text-right">
-  <a href="/catalog" class="button light">Continue shopping</a>
-  <a href="#" class="button">Checkout</a>
+<p class="text-right" style="margin-top: 50px;">
+  <a href="/catalog" class="button light">В каталог</a>
+  <a href="#" class="button">Оформить VKID</a>
 </p>
+
+<script src="{% static 'js/cart_scripts.js' %}"></script>
 {% endblock %}

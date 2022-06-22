@@ -376,8 +376,17 @@ object-fit: cover;
   font-size: 25px;
   width: 100%;
 }
+.cart>thead>tr{
+  font-size: initial;
+}
 .cart>thead>tr>th{
-  
+  text-align: left;
+}
+.cart>thead{
+  margin-bottom: 10px; 
+}
+.cart>tbody>tr>td{
+  text-align: left;
 }
 .button{
   width: 200px;

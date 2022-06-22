@@ -37,18 +37,18 @@ function updateCartCounter() {
 
   $('#add_product_to_cart_btn').click(function (e) {
     
-    let btn = document.querySelector('#add_product_to_cart_btn');
-    const slug = btn.dataset.slug;
+    //let btn = document.querySelector('#add_product_to_cart_btn');
+    let slug = this.dataset.slug;
     let quantity = $('#id_quantity').val();
 
-    console.log(`/cart/add/${slug}&quantity${quantity}/`);
+    console.log(`/cart/add/${slug}&quantity=${quantity}`);
 
     $.ajax({
-      url: `/cart/add/${slug}&quantity=${quantity}/`,
+      url: `/cart/add/${slug}&quantity=${quantity}`,
       type: 'get',
       //data: {product_slug: slug, quantity: quantity},
       success: function (response) {
-        $('.cart_total').html(response);
+        $('.cart_total').html(response['total_count']);
       },
      
     });
