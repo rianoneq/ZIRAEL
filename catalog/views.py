@@ -1,8 +1,8 @@
-from audioop import reverse
 from django.shortcuts import render
 from .models import Category, Product, PostProductImage
 from cart.forms import CartAddProductForm
 from django.views import generic
+
 
 def index_page(request):
   return render(
@@ -53,7 +53,7 @@ class ItemDetailView(generic.DetailView):
 class RenderCatalog(generic.ListView):
 
   model = Product
-  paginate_by = 3
+  paginate_by = 9
 
   def get_context_data(self, **kwargs):
   

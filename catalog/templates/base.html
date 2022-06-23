@@ -44,29 +44,49 @@
       {% if is_paginated %}
         <div class="pagination">
           <span class="page-links">
-            {% if page_obj.has_previous %}
-              <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">PREV</a>
-            {% endif %}
-            <span class="page-current"style="display: flex;">
-              {% for n in page_obj.paginator.page_range %}
-                <div class="pag-objqw">
-                    
-                  <a href="?page={{ n }}">
-                    {% if n == page_obj.number %}
-                    <div class="" style="width: 20px;height:20px;background-color: red;border-radius: 50%;margin-right: 10px;"></div>
-                    
-                    {% else %}
-                    <div class="" style="width: 20px;height:20px;background-color: blue;border-radius: 50%;margin-right: 10px;"></div>
-                    {% endif %}
+            <span class="page-current">
+              {% if page_obj.has_previous %}
+                <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}" style="margin-right: 10px;">prev</a>
 
-                  </a>
+              {% endif %}
+              <div class="pag_pages">
+
+                
+                {% with page_obj.number as page %}
+                  <div class="pag_before_current pag_item">
+                    {% if page > 2 %}
+                      <a href="?page={{ page|add:'-2' }}">
+                        {{ page|add:"-2" }}
+                      </a>
+                    {% endif %}
+                    {% if page > 1 %}
+                      <a href="?page={{ page|add:'-1' }}">
+                        {{ page|add:"-1" }}
+                      </a>
+                    {% endif %}
+                  </div>
+                  
+                  <div class="pag_current pag_item">
+                    <a href="?page={{ page }}" style="color: var(--officer-site-color);"> 
+                      {{ page }}
+                    </a>
+                  </div>
+                  {# qew #}
+                  <div class="pag_after_current pag_item">
+                    {% if page != page_obj.paginator.num_pages %}
+                      <a href="?page={{ page|add:'+1' }}">
+                        {{ page|add:"+1" }}
+                      </a>
+                    {% endif %}
+                  </div>
+                  {% endwith %}
                 </div>
-              {% endfor %}
-              Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+              {% if page_obj.has_next %}
+                <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">next</a>
+              {% endif %}
+              
             </span>
-            {% if page_obj.has_next %}
-              <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">NEXT</a>
-            {% endif %}
+              <div class="total_pages">total pages: {{ page_obj.paginator.num_pages }}</div>
           </span>
         </div>
       {% endif %}

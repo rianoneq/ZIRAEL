@@ -67,7 +67,7 @@ img{
   align-items: center;
 }
 .header>ul{
-  font-size: 27px;
+  font-size: 25px;
   display: flex;
 }
 .header>ul>a{
@@ -398,4 +398,24 @@ object-fit: cover;
 }
 .light{
   border: 3px solid var(--officer-site-color);
+}
+
+/* pagination styles */
+.pag_item{
+  margin-right: 10px;
+}
+.page-current{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.pag_pages{
+  display: flex;
+}
+.page-links{
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column-reverse;
 }
