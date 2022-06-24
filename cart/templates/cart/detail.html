@@ -1,55 +1,68 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<h1 style="color: var(--general-site-color);">Корзина товаров</h1>
-<table class="cart">
-  <thead>
-    <tr>
-      <th>Пикча</th>
-      <th>Товар</th>
-      <th>Количество</th>
-      <th>Общая цена</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for item in cart %}
-    {% with product=item.product %}
-    <tr class="cart_product" style="vertical-align: middle; ">
-      <td>
-        <a href="{{ product.get_absolute_url }}">
-          <img
-            src="{% if product.image %}/static/images/{{ product.image }}{% else %}/static/images/site_images/anon.png{% endif %}"
-            style="height: 50px;width:50px;">
-        </a>
-      </td>
-      <td>{{ product.name }}</td>
-      <td>{{ item.quantity }}</td>
-      <!-- <td class="num" >{{ item.price }}<div class="currency"
-        style="color:var(--officer-site-color);">₽</div>
-      </td> -->
-      <td class="num">{{ item.total_price }}₽
-        <!-- <div class="currency" style="color:var(--officer-site-color);">₽</div> -->
-      </td>
-      <td><a data-product-slug="{{ product.slug }}" class="remove_cart_product">
-        <img src="{% static 'images/site_images/delete_item_cross.svg' %}" alt="delete_product"
-             style="width: 40px;height:40px">
-      </a></td>
-    </tr>
-    {% endwith %}
-    {% endfor %}
-    <tr class="total" style="margin-top: 20px;">
-      <td>Total</td>
-      <td class="total_price" style="display: flex;">{{ cart.get_total_price }}<div class="currency"
-          style="color:var(--officer-site-color);">₽</div>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<p class="text-right" style="margin-top: 50px;">
-  <a href="/catalog" class="button light">В каталог</a>
-  <a href="#" class="button">Оформить VKID</a>
-</p>
+  <h1 style="color: var(--general-site-color);">Корзина товаров</h1>
+  <div id="cart_text">
+    <!-- for js -->
+  </div>
+  {% if cart|length > 0 %}
+    <table class="cart_table">
+      <thead>
+        <tr>
+          <th>Пикча</th>
+          <th>Товар</th>
+          <th>Количество</th>
+          <th>Общая цена</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in cart %}
+          {% with product=item.product %}
+            <tr class="cart_product" style="vertical-align: middle; ">
+              <td>
+                <a href="{{ product.get_absolute_url }}">
+                  <img
+                    src="{% if product.image %}/static/images/{{ product.image }}{% else %}/static/images/site_images/anon.png{% endif %}"
+                    style="height: 50px;width:50px;">
+                </a>
+              </td>
+              <td>{{ product.name }}</td>
+              <td>{{ item.quantity }}</td>
+              <!-- <td class="num" >{{ item.price }}<div class="currency"
+                style="color:var(--officer-site-color);">₽</div>
+              </td> -->
+              <td class="num">
+                {{ item.total_price }}₽
+                <!-- <div class="currency" style="color:var(--officer-site-color);">₽</div> -->
+              </td>
+              <td><a data-product-slug="{{ product.slug }}" class="remove_cart_product">
+                <img src="{% static 'images/site_images/delete_item_cross.svg' %}" alt="delete_product"
+                    style="width: 40px;height:40px">
+              </a></td>
+            </tr>
+          {% endwith %}
+        {% endfor %}
+          <tr class="total" style="margin-top: 20px;">
 
-<script src="{% static 'js/cart_scripts.js' %}"></script>
+            <td>Total</td>
+            <td class="total_price" style="display: flex;">{{ cart.get_total_price }}<div class="currency"
+                style="color:var(--officer-site-color);">₽</div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+  {% else %}
+    <span style="font-size: 22px;">
+      Ваша корзина пуста😢
+    </span>
+  {% endif %}
+  <p class="text-right" style="margin-top: 50px;">
+    <a href="/catalog" class="button light">В каталог</a>
+    {% if cart|length > 0 %}
+      <a href="#" class="button" id="create_order">Оформить VKID</a>
+    {% endif %}
+  </p>
+
+  <script src="{% static 'js/cart_scripts.js' %}"></script>
 {% endblock %}

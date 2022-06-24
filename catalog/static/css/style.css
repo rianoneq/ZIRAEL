@@ -372,20 +372,20 @@ object-fit: cover;
 
 
 /* cart styles */
-.cart{
+.cart_table{
   font-size: 25px;
   width: 100%;
 }
-.cart>thead>tr{
+.cart_table>thead>tr{
   font-size: initial;
 }
-.cart>thead>tr>th{
+.cart_table>thead>tr>th{
   text-align: left;
 }
-.cart>thead{
+.cart_table>thead{
   margin-bottom: 10px; 
 }
-.cart>tbody>tr>td{
+.cart_table>tbody>tr>td{
   text-align: left;
 }
 .button{

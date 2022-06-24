@@ -28,8 +28,12 @@
           <a href="/catalog"><li>КАТАЛОГ</li></a>
           <a href="/categories"><li>КАТЕГОРИИ</li></a>
           {% with total_items=cart|length %}
-            <a href="/cart" style="position: relative;"><li>КОРЗИНА</li>
-              <div class="cart_total">{{ total_items }}</div>
+            <a href="/cart" style="position: relative;" id="cart"><li>КОРЗИНА</li>
+              {% if total_items > 0 %}
+                <div class="cart_total">
+                  {{ total_items }}
+                </div>
+              {% endif %}
               </a>
           {% endwith %}
               <!-- intrestiong func, само подставляет окончание в зависимости от числа -->
