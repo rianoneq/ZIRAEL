@@ -37,9 +37,28 @@
               </a>
           {% endwith %}
           {% if user.is_authenticated %}
-            <a href="{% url 'accounts:user' %}">me, {{ user.username }}</a>
-            <a href="{% url 'accounts:logout' %}">logout</a>
-
+            <span id="me_header">me
+              
+              <svg class="me_dropdown_arrow" width="30px" height="30px" viewBox="0 0 10 5" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink">
+                <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
+                <g id="Icons" stroke="none" stroke-width="1" fill="white" fill-rule="evenodd">
+                  <g id="24-px-Icons" transform="translate(-223.000000, -368.000000)" fill="white">
+                    <g id="ic_dropdown_cyan" transform="translate(216.000000, 360.000000)">
+                      <g id="Path-2">
+                        <polygon points="7 8 17 8 12 13"></polygon>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+              <div class="me_gropdown">
+                <a href="{% url 'accounts:user' %}" class="me_account">{{ user.username }}</a>
+                <a href="{% url 'logout' %}?next={{request.path}}" class="me_logout">logout</a>
+              </div>
+            </span> 
+          {% else %}
+            <a href="{% url 'login' %}">login</a> 
           {% endif %}
               <!-- intrestiong func, само подставляет окончание в зависимости от числа -->
               <!-- {{ total_items|pluralize }} -->

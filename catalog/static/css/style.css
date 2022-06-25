@@ -57,6 +57,44 @@ img{
 }
 
 /* header styles */
+
+#me_header{
+  margin-left: 10px;
+  margin-right: 2px;
+  position: relative;
+  display: flex;
+  align-items: center;
+
+}
+
+#me_header:hover .me_gropdown{
+  display: block;
+}
+#me_header:hover{
+  color: var(--general-site-color);
+  transition: .15s;
+}
+
+.me_dropdown_arrow{
+  transition: .15s;
+  margin-left: 5px;
+}
+#me_header:hover .me_dropdown_arrow{
+  transform: rotate(180deg);
+}
+.me_account:hover,
+.me_account:active,
+.me_logout:hover,
+.me_logout:active{
+  transition: .15s;
+  color: var(--officer-site-color);
+}
+.me_gropdown{
+  background-color: #253861;
+  bottom: -60px;
+  position: absolute;
+  display: none;
+}
 .ava_main {
   /* width: 50px; */
   height: 45px;

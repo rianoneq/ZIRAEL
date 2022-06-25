@@ -34,6 +34,7 @@ urlpatterns += [
 
 urlpatterns += [
   re_path(r'^accounts/', include(('accounts.urls', 'accounts'), namespace='accounts')),
+  re_path("^accounts/", include("django.contrib.auth.urls")),
 ]
 
 urlpatterns += static(settings.STATIC_URL,

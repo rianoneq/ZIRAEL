@@ -3,7 +3,7 @@
 {% block content %}
 <div class="cat_item_data">
   <div class="cat_info">
-    <a href="/categories" class="back"><Назад</a>
+    <a href="{% url 'catalog:categories_page' %}" class="back"><Назад</a>
     <div class="cat_name">{{ category.name }}</div>
     {% if category.image %}
     

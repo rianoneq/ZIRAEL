@@ -11,8 +11,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
-from tkinter.tix import Tree
 from dotenv import load_dotenv
+from django.urls import reverse_lazy
 import os
 
 load_dotenv()
@@ -64,7 +64,7 @@ ROOT_URLCONF = 'zirael.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -130,7 +130,10 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL = 'catalog/static/images/'
 MEDIA_ROOT = os.path.join(BASE_DIR, MEDIA_URL)
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+LOGIN_URL = reverse_lazy('login')
+LOGOUT_URL = reverse_lazy('logout')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
