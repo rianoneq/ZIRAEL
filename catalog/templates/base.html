@@ -25,10 +25,10 @@
         </div>
         <ul>
           <a href="/"><li>ГЛАВНАЯ</li></a>
-          <a href="/catalog"><li>КАТАЛОГ</li></a>
-          <a href="/categories"><li>КАТЕГОРИИ</li></a>
+          <a href="{% url 'catalog:catalog_page' %}"><li>КАТАЛОГ</li></a>
+          <a href="{% url 'catalog:categories_page' %}"><li>КАТЕГОРИИ</li></a>
           {% with total_items=cart|length %}
-            <a href="/cart" style="position: relative;" id="cart"><li>КОРЗИНА</li>
+            <a href="{% url 'cart:cart_detail' %}" style="position: relative;" id="cart"><li>КОРЗИНА</li>
               {% if total_items > 0 %}
                 <div class="cart_total">
                   {{ total_items }}
@@ -36,6 +36,11 @@
               {% endif %}
               </a>
           {% endwith %}
+          {% if user.is_authenticated %}
+            <a href="{% url 'accounts:user' %}">me, {{ user.username }}</a>
+            <a href="{% url 'accounts:logout' %}">logout</a>
+
+          {% endif %}
               <!-- intrestiong func, само подставляет окончание в зависимости от числа -->
               <!-- {{ total_items|pluralize }} -->
               <!-- {{ cart.get_total_price }}₽ -->

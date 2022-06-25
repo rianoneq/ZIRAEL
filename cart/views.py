@@ -3,9 +3,9 @@ from django.views.decorators.http import require_POST
 from catalog.models import Product
 from .cart import Cart
 from django.http import JsonResponse
-from django.db import transaction
+# from django.db import transaction
 
-@transaction.atomic
+# @transaction.atomic
 def cart_add(request, product_slug, quantity):
 
     cart = Cart(request)

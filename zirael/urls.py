@@ -16,21 +16,24 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import re_path
-from django.views.generic import RedirectView
 from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls import include
 
 
 urlpatterns = [
-    re_path('admin/', admin.site.urls),
+  re_path('admin/', admin.site.urls),
 ]
 
 urlpatterns += [
-    re_path('', include('catalog.urls')),
+  re_path('', include(('catalog.urls', 'catalog'), namespace='catalog')),
 ]
 urlpatterns += [
   re_path(r'^cart/', include(('cart.urls', 'cart'), namespace='cart')),
+]
+
+urlpatterns += [
+  re_path(r'^accounts/', include(('accounts.urls', 'accounts'), namespace='accounts')),
 ]
 
 urlpatterns += static(settings.STATIC_URL,

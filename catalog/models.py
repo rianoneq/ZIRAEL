@@ -18,7 +18,7 @@ class Category(models.Model):
     return self.name
 
   def get_absolute_url(self):
-    return reverse('category_detail_view', args=[str(self.slug)])
+    return reverse('catalog:category_detail_view', args=[str(self.slug)])
 
 
 def get_uplaod_file_name(slug):
@@ -54,7 +54,7 @@ class Product(models.Model):
     verbose_name_plural = 'Товары'
 
   def get_absolute_url(self):
-    return reverse('item_detail_view', args=[str(self.slug)])
+    return reverse('catalog:item_detail_view', args=[str(self.slug)])
 
 
 

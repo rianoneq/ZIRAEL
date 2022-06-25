@@ -60,8 +60,6 @@ function updateCartCounter() {
           }
         } else {
           if (response['data']['error']) {
-            console.log(response['data']['error']);
-
             if ($('#output_message').length < 1){
               $('#output').append(`<span id='output_message' style="color: red;">${response['data']['error']}</span>`)
             }
