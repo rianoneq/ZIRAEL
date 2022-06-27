@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+ <h1>{{ request.user.username }}</h1>
+  <div class="">
+    <span>Мои заказы:</span> 
+    {% if orders|length > 0 %}
+    <table class="cart_table">
+      <thead>
+        <tr>
+          <th>Заказ</th>
+          <th>Количество товаров</th>
+          <th>Общая цена</th>
+          <th>Статус</th>
+          <th></th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+              <tr class="cart_product" style="vertical-align: middle; ">
+                <td>
+                  <a href="{{ order.get_absolute_url }}">
+                    Заказ #{{ order.id }}
+                  </a>
+                </td>
+                <td>{{ order.get_total_count }}</td>
+                <td>{{ order.get_total_price }}₽</td>
+                <td>{{ order.status }}</td>
+                <td><a href="https://oplata.qiwi.com/form/?invoice_uid={{ order.order_id }}" target="blank">url</a></td>
+                <td><button data-order-id="{{ order.order_id }}" class="i_paid_order_button">я оплатил</button></td>
+                <!-- <td class="num" >{{ item.price }}<div class="currency"
+                          style="color:var(--officer-site-color);">₽</div>
+                        </td> -->
+                <td class="num">
+
+                  <!-- <div class="currency" style="color:var(--officer-site-color);">₽</div> -->
+                </td>
+              </tr>
+            {% endfor %}
+            
+          </tbody>
+        </table>
+        {% else %}
+        no orders
+        {% endif %}
+    </div>
+    
+    <script src="{% static 'js/user_page_scripts.js' %}"></script>
+{% endblock %}

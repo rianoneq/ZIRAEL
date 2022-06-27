@@ -28,14 +28,20 @@ urlpatterns = [
 urlpatterns += [
   re_path('', include(('catalog.urls', 'catalog'), namespace='catalog')),
 ]
+
 urlpatterns += [
   re_path(r'^cart/', include(('cart.urls', 'cart'), namespace='cart')),
+]
+
+urlpatterns += [
+  re_path(r'^orders/', include(('orders.urls', 'order'), namespace='order')),
 ]
 
 urlpatterns += [
   re_path(r'^accounts/', include(('accounts.urls', 'accounts'), namespace='accounts')),
   re_path("^accounts/", include("django.contrib.auth.urls")),
 ]
+
 
 urlpatterns += static(settings.STATIC_URL,
                       document_root=settings.STATIC_ROOT)

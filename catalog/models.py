@@ -1,5 +1,4 @@
 from __future__ import print_function
-from turtle import width
 from django.db import models
 from django.urls import reverse
 from django.core.validators import FileExtensionValidator
@@ -17,11 +16,11 @@ class Category(models.Model):
   def __str__(self) -> str:
     return self.name
 
-  def get_absolute_url(self):
+  def get_absolute_url(self) -> str:
     return reverse('catalog:category_detail_view', args=[str(self.slug)])
 
 
-def get_uplaod_file_name(slug):
+def get_uplaod_file_name(slug) -> str:
   return f'product_images/{slug}'
 
 class Product(models.Model):
@@ -56,19 +55,17 @@ class Product(models.Model):
   def get_absolute_url(self):
     return reverse('catalog:item_detail_view', args=[str(self.slug)])
 
-
-
   def __str__(self) -> str:
     return self.name
 
 class PostProductImage(models.Model):
 
-  def upload_to(self, *args):
+  def upload_to(self, *args) -> str:
     image_path = f'product_images/{self.prod.slug}_/{args[0]}'
     return image_path
 
   prod = models.ForeignKey(Product, default=None, on_delete=models.CASCADE)
   images = models.FileField(upload_to=upload_to)
 
-  def __str__(self):
+  def __str__(self) -> str:
     return str(self.prod.slug)

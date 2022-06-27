@@ -61,7 +61,7 @@
     <a href="/catalog" class="button light">В каталог</a>
     {% if cart|length > 0 %}
       {% if request.user.is_authenticated %}
-        <a href="{{ cart.get_payment_url }}" class="button" id="create_order">Оформить VKID</a>
+        <a href="{% url 'order:create' %}" class="button" id="create_order">Оформить VKID</a>
       {% else %}
         <a href="{% url 'accounts:login' %}" class="button" id="create_order">Необходима регистрация</a>
       {% endif %}

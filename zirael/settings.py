@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'catalog',
     'cart',
     'accounts',
+    'orders',
 ]
 
 MIDDLEWARE = [
@@ -56,6 +57,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_referrer_policy.middleware.ReferrerPolicyMiddleware',
     'cart.middleware.ProcessErrorProductAdd'
 ]
 
@@ -136,4 +138,14 @@ LOGOUT_REDIRECT_URL = '/'
 LOGIN_URL = reverse_lazy('login')
 LOGOUT_URL = reverse_lazy('logout')
 
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_HOST = 'sftp.hushmail.com'
+# EMAIL_HOST_USER = 'admin@zirael.com'
+# # EMAIL_HOST_PASSWORD = 'zxczxc'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_USE_SSL = False
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REFERRER_POLICY = 'origin'

@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<h1 style="color: var(--general-site-color);">Заказ номер {{ order.id }}</h1>
+<div id="cart_text">
+  <!-- for js -->
+</div>
+<table class="cart_table">
+  <thead>
+    <tr>
+      <th>Пикча</th>
+      <th>Товар</th>
+      <th>Количество</th>
+      <th>Общая цена</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in order_products %}
+    {% with product=item.product %}
+    <tr class="cart_product" style="vertical-align: middle; ">
+      <td>
+        <a href="{{ product.get_absolute_url }}">
+          <img
+            src="{% if product.image %}/static/images/{{ product.image }}{% else %}/static/images/site_images/anon.png{% endif %}"
+            style="height: 50px;width:50px;">
+        </a>
+      </td>
+      <td>{{ product.name }}</td>
+      <td>{{ item.quantity }}</td>
+      <!-- <td class="num" >{{ item.price }}<div class="currency"
+                style="color:var(--officer-site-color);">₽</div>
+              </td> -->
+      <td class="num">
+        {{ item.price }}₽
+        <!-- <div class="currency" style="color:var(--officer-site-color);">₽</div> -->
+      </td>
+
+    </tr>
+    {% endwith %}
+    {% endfor %}
+    <tr class="total" style="margin-top: 20px;">
+
+      <td>Total</td>
+      <td class="total_price" style="display: flex;">{{ order.get_total_price }}<div class="currency"
+          style="color:var(--officer-site-color);">₽</div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+<script src="{% static 'js/cart_scripts.js' %}"></script>
+{% endblock %}
