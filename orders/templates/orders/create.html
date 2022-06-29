@@ -2,22 +2,28 @@
 
 
 {% block content %}
-<h1>Checkout</h1>
 <div class="order-info">
-  <h3>Your order</h3>
+  <h1 style="color: var(--general-site-color);">Ваш заказ:</h1>
   <ul>
     {% for item in cart %}
     <li>
       {{ item.quantity }}x {{ item.product.name }}
-      <span>${{ item.total_price }}</span>
+      <span>{{ item.total_price }}₽</span>
     </li>
     {% endfor %}
   </ul>
-  <p>Total: ${{ cart.get_total_price }}</p>
+  <p>Total: {{ cart.get_total_price }}₽</p>
 </div>
 <form action="." method="post" class="order-form">
   {{ form.as_p }}
-  <p><input type="submit" value="Place order"></p>
+  {% if errors %}
+    {% for error in errors %}
+      <div class="alert alert-danger">
+        <strong style="color: red;">{{ error }}</strong>
+      </div>
+    {% endfor %}
+  {% endif %}
+  <p ><input class="button light" type="submit" value="Place order"></p>
   {% csrf_token %}
 </form>
 {% endblock %}

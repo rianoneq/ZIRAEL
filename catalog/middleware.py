@@ -1,6 +1,6 @@
 from django.http import JsonResponse
 
-class ProcessErrorProductAdd:
+class ProcessErrors:
   def __init__(self, get_response) -> None:
     self._get_response = get_response
 

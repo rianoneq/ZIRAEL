@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
- <h1>{{ request.user.username }}</h1>
+ <h1>Я - {{ request.user.username }}</h1>
   <div class="">
-    <span>Мои заказы:</span> 
+    <span style="font-size: 22px;color: var(--general-site-color);">Мои заказы:</span> 
     {% if orders|length > 0 %}
-    <table class="cart_table">
+    <table class="cart_table" style="margin-top: 25px;">
       <thead>
         <tr>
           <th>Заказ</th>
-          <th>Количество товаров</th>
+          <th>Товары</th>
           <th>Общая цена</th>
           <th>Статус</th>
           <th></th>
@@ -17,17 +17,46 @@
         </thead>
         <tbody>
             {% for order in orders %}
-              <tr class="cart_product" style="vertical-align: middle; ">
+              <tr class="cart_product" style="vertical-align: inherit; ">
                 <td>
                   <a href="{{ order.get_absolute_url }}">
                     Заказ #{{ order.id }}
                   </a>
                 </td>
-                <td>{{ order.get_total_count }}</td>
+                <td style="word-break: break-all;">
+                  <ul class="order_items">
+                    {% for item in order.items.all %}
+                    <li>
+                      <img style="height: 50px;width:50px;" src="/static/images/{{ item.product.image }}" alt="">
+                      
+                      x{{ item.quantity }}
+                    </li>
+                    {% endfor %}
+                  </ul>
+                </td>
                 <td>{{ order.get_total_price }}₽</td>
-                <td>{{ order.status }}</td>
-                <td><a href="https://oplata.qiwi.com/form/?invoice_uid={{ order.order_id }}" target="blank">url</a></td>
-                <td><button data-order-id="{{ order.order_id }}" class="i_paid_order_button">я оплатил</button></td>
+                <td>
+                  {% if order.status == "WA" %}
+                    <span style="color:orange">Ожидание</span>
+                  {% elif order.status == "EX" %}
+                    <span style="color:red">Истекло</span> 
+                  {% elif order.status == "PD" %}
+                    <span style="color:greenyellow">Оплачено</span> 
+                  {% endif %}
+                </td>
+                {% if order.status == "WA" %}
+                <td class="unpaid_order_data">
+                  <div class="pay_data">
+                    <button class="pay_button" onclick="window.open('https://oplata.qiwi.com/form/?invoice_uid={{ order.order_id }}', '_blank');">
+                      Перейти к форме оплаты
+                    </button>
+                    <button class="i_paid_order_button pay_button" style="position: relative;" data-order-id="{{ order.order_id }}">
+                      <div class="error_msg"></div>
+                      Я оплатил
+                    </button>
+                  </div>
+                </td>
+                {% endif %}
                 <!-- <td class="num" >{{ item.price }}<div class="currency"
                           style="color:var(--officer-site-color);">₽</div>
                         </td> -->
@@ -44,6 +73,17 @@
         no orders
         {% endif %}
     </div>
-    
+
+    <!-- popup -->
+  <div class="popup__bg">
+    <form class="popup">
+      <!-- <img src="images/close.svg"  class="close-popup"> -->
+      <img style="height: 50px;width:50px;" src="/static/images/site_images/delete_item_cross.svg"  class="close-popup"></img>
+      <span>Платеж прошел, спасибо за покупку в интернет-магазине ZIRAEL💕</span><br>
+      <span>Все товары будут упакованы и отправлены на указанный Вами зип-код.</span>
+      
+    </form>
+  </div>
+
     <script src="{% static 'js/user_page_scripts.js' %}"></script>
 {% endblock %}

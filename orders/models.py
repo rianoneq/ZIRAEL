@@ -57,23 +57,23 @@ class Order(models.Model):
   def get_total_count(self):
     return sum(item.quantity for item in self.items.all())
 
-  def pas(self):
-    return self.items
-
   def get_total_price(self):
     return sum(item.get_cost() for item in self.items.all())
   
   def get_absolute_url(self):
     return reverse('order:order_detail_view', args=[str(self.id)])
 
+  def check_bill_status(self, bill_id):
+    checker_output = _check_bill_status(bill_id=bill_id)
+    if checker_output['success']:
+      return checker_output['data']
+    raise Exception('Незвестная ошибка')
+
   def save(self, *args, **kwargs):
     data = self.get_order_data()
     self.order_id = data['order_id']
     self.bill_id = data['bill_id']
     super(Order, self).save(*args, **kwargs)
-
-  def check_bill_status(self, bill_id):
-    return _check_bill_status(bill_id=bill_id)
 
   class Meta:
     ordering = ('-created',)

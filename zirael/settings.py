@@ -58,7 +58,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_referrer_policy.middleware.ReferrerPolicyMiddleware',
-    'cart.middleware.ProcessErrorProductAdd'
+    'catalog.middleware.ProcessErrors',
 ]
 
 ROOT_URLCONF = 'zirael.urls'

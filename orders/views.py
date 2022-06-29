@@ -23,46 +23,81 @@ class OrderDetailView(generic.DetailView):
         context['page_title'] = f'Мой заказ#{order_id}' 
         return context
 
+def can_user_create_order(user):
+    waiting_orders = Order.objects.filter(user=user).filter(status__exact='WA')
+
+    print(waiting_orders, len(waiting_orders))
+    if len(waiting_orders) == 0:
+        return True
+
+    return False
+
+@login_required
 def create(request):
     cart = Cart(request)
-    if request.method == 'POST':
-        form = OrderCreateForm(request.POST)
-        if form.is_valid():
-            total_price = cart.get_total_price()
-            total_count = cart.__len__()
-            if total_price > 0 and total_count > 0:
-            
-                order = form.save(commit=False)
-                order.user = request.user
+    total_price = cart.get_total_price()
+    total_count = cart.__len__()
+    if total_price > 0 and total_count > 0:
+        if request.method == 'POST':
+            form = OrderCreateForm(request.POST)
 
-                # set order total price and count here
-                order.total_price = total_price
-                order.total_count = total_count
-                order.save()
-                for item in cart:
-                    OrderItem.objects.create(order=order,
-                                            product=item['product'],
-                                            price=item['price'],
-                                            quantity=item['quantity'])
-                # очистка корзины
+            if not request.user:
+                raise Exception
 
-                cart.clear()
-                # запуск асинхронной задачи
-                # order_created.delay(order.id)
-                return render(request, 'orders/created.html',
-                            {'order': order, 'page_title': 'Заказ успешно создан!'})
+            can_create_order = can_user_create_order(user=request.user)
+            if can_create_order:
+                if form.is_valid():
+                    
+                        order = form.save(commit=False)
+                        order.user = request.user
+
+                        # set order total price and count here
+                        order.total_price = total_price
+                        order.total_count = total_count
+                        order.save()
+                        for item in cart:
+                            OrderItem.objects.create(order=order,
+                                                    product=item['product'],
+                                                    price=item['price'],
+                                                    quantity=item['quantity'])
+                        # очистка корзины
+
+                        cart.clear()
+                        # запуск асинхронной задачи
+                        # order_created.delay(order.id)
+                        return render(request, 'orders/created.html',
+                                    {'order': order, 'page_title': 'Заказ успешно создан!'})
             else:
-                return redirect('cart:cart_detail')
+                return render(request, 'orders/create.html',{'form':form, 'errors': ['У Вас уже висит 1 неоплаченный заказ. Пока он не истечет или не будет оплачен, вы не сможете создавать другие.']})
+        else:
+            form = OrderCreateForm
+        return render(request, 'orders/create.html',
+                    {'cart': cart, 'form': form, 'page_title': 'Создание заказа...'})
     else:
-        form = OrderCreateForm
-    return render(request, 'orders/create.html',
-                  {'cart': cart, 'form': form, 'page_title': 'Создание заказа...'})
+        return redirect('cart:cart_detail')
 
 
 def check_order_status(request, bill_id):
+    statuses = {
+        'PAID': 'PD',
+        'EXPIRED': 'EX',
+        'WAITING': 'WA',
+        'REJECTED': 'RE'
+    }
+
     order = Order.objects.filter(order_id=bill_id).first()
+    current_order_status_in_db = order.status
+
+    data = order.check_bill_status(order.bill_id)
+    real_order_status = data['status']
     
-    st = order.check_bill_status(order.bill_id)
+    if not data:
+        raise Exception('Похоже вы не оплатили, либо заказ уже истек')
+    
+    if current_order_status_in_db != statuses[real_order_status]:
+        Order.objects.filter(order_id=bill_id).update(status=statuses[real_order_status])
+        
+
     return JsonResponse({
-        'success': st
+        'data': data
     })

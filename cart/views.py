@@ -6,6 +6,7 @@ from django.http import JsonResponse
 # from django.db import transaction
 
 # @transaction.atomic
+# @ajax_required
 def cart_add(request, product_slug, quantity):
 
     cart = Cart(request)

@@ -39,7 +39,11 @@ body{
   padding: 0;
   margin: 0;
 }
-
+button{
+  padding: 0;
+  margin: 0;
+  background-color: inherit;
+}
 .wrapper{
   width: 80%;
   margin: auto;
@@ -138,8 +142,12 @@ img{
 .main_text>img{
   height: 60px;
 }
-.main_text>h1{
+.main_text{
   margin: 0;
+  font-size: 26px;
+}
+.main_page>a{
+  font-size: 3em;
 }
 .main_images{
   display: flex;
@@ -427,15 +435,25 @@ object-fit: cover;
   text-align: left;
 }
 .button{
-  width: 200px;
-  height: 100px;
+  height: 60px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
   padding: 10px;
   border: 3px solid gray;
   color: white;
   font-size: 30px;
+  background-color: inherit;
+}
+.buttons{
+  display: flex;
+  align-items: center;
 }
 .light{
   border: 3px solid var(--officer-site-color);
+}
+.light_green{
+  border: 3px solid var(--general-site-color);
 }
 
 /* pagination styles */
@@ -456,4 +474,206 @@ object-fit: cover;
   justify-content: center;
   align-items: center;
   flex-direction: column-reverse;
+}
+
+/* user page styles */
+.order_items{
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 300px;
+}
+.pay_data{
+  font-size: 10px;
+  display: flex;
+  flex-direction: column;
+}
+.pay_button{
+  padding: 6px;   
+  width: 145px;
+  border: 3px solid gray;
+  color: white;
+  
+  background-color: inherit;
+  font-size: 14px;
+}
+.pay_button:last-child{
+  margin-top: 5px;
+}
+.cart_product>td{
+  padding: 7px;
+}
+
+/* user acc popup styles */
+/* Важная часть */
+.popup{
+  font-size: 25px;
+  background-color: black;
+  border: 2px solid var(--officer-site-color);
+}
+.popup__bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.9);
+  opacity: 0; 
+  pointer-events: none; 
+  transition: 0.5s all;
+}
+
+.popup__bg.active {
+
+  opacity: 1;
+  pointer-events: all; 
+  transition: 0.5s all;
+}
+
+.popup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 50%;
+  padding: 25px;
+  transition: 0.5s all;
+}
+
+.popup.active {
+  transform: translate(-50%, -50%) scale(1);
+  transition: 0.5s all;
+}
+
+/* Конец важной части */
+/* Далее код для стилизации формы */
+.close-popup {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.popup label {
+  width: 100%;
+  margin-bottom: 25px;
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.popup .label__text {
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: #cfd0d3;
+  margin-bottom: 5px;
+}
+
+.popup input {
+  height: 45px;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #cfd0d3;
+}
+
+.popup input:focus {
+  border-bottom: 1px solid #2982ff;
+}
+
+.popup input:focus+.label__text {
+  color: #2982ff;
+}
+
+.popup textarea {
+  resize: none;
+  width: 100%;
+  height: 150px;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #cfd0d3;
+  font-size: 18px;
+  padding-top: 5px;
+}
+
+.popup textarea:focus {
+  border-bottom: 1px solid #2982ff;
+}
+
+.popup textarea:focus+.label__text {
+  color: #2982ff;
+}
+
+.popup button {
+  width: 100%;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 18px;
+  border: 2px solid #2982ff;
+  background: #2982ff;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: 0.5s all;
+}
+
+.popup button:hover {
+  background: #fff;
+  color: #2982ff;
+  transition: 0.5s all;
+}
+
+
+@media screen and (max-width: 1200px) {
+  .header>ul{
+    font-size: 21px;
+  }
+  .ava_main{
+    height: 30px;
+  }
+  .me_gropdown{
+    bottom: -45px;
+  }
+  .main_text{
+    font-size: 20px;
+  }
+  .main_page>a {
+      font-size: 2em;
+    }
+  .product_name{
+    font-size: 22px;
+  }
+  .product_descr{
+    font-size: 16.5px;
+  }
+  .product_price{
+    font-size: 17px;
+  }
+}
+@media screen and (max-width: 900px) {
+  .header>ul{
+    font-size: 16px;
+  }
+  .ava_main{
+    height: 30px;
+  }
+  .me_gropdown{
+    bottom: -35px;
+  }
+  .main_text{
+    font-size: 16px;
+  }
+  .main_page>a {
+      font-size: 1.5em;
+    }
+  .product_name{
+    font-size: 21px;
+  }
+  .product_descr{
+    font-size: 15.5px;
+  }
+  .product_price{
+    font-size: 17px;
+  }
 }

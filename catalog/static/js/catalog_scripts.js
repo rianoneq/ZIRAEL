@@ -44,7 +44,7 @@ card_name.forEach(text => {
   else if (window.innerWidth < 600) {
     max_length = 10
   }
-  else if (window.innerWidth < 1000) {
+  else if (window.innerWidth < 900) {
     max_length = 11
   }
   else if (window.innerWidth < 1000) {

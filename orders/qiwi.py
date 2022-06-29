@@ -18,13 +18,10 @@ def create_bill(amount, lifetime, comment):
 
 def _check_bill_status(bill_id):
   try:
-
-    pay_url = str(p2p.check(bill_id=str(bill_id)).pay_url)
-    status = str(p2p.check(bill_id=str(bill_id)).status)
-    bill_id = str(p2p.check(bill_id=str(bill_id)).bill_id)
+    bill = p2p.check(bill_id=str(bill_id))
+    status = str(bill.status)
+    bill_id = str(bill.bill_id)
   except Exception as e:
-    return False
+    return {'success': False, 'data': {'error': e}}
 
-  if status == 'PAID':
-    return True
-  return False
+  return {'success': True, 'data': {'status': status}}

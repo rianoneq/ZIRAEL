@@ -5,7 +5,6 @@ function deleteProduct() {
     let slug = this.dataset.productSlug;
     let child = this;
 
-    console.log(slug);
 
     $.ajax({
       url: `/cart/remove/${slug}`,

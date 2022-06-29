@@ -5,8 +5,16 @@
 {% block content %}
 <h1>Спасибо,</h1>
 
-<p>Ваш заказ создался, у вас есть 10 минут оплатить. </p>
-  <a href="https://oplata.qiwi.com/form/?invoice_uid={{ order.order_id }}" target="blank">Ссылка на оплату</a>
-  <a href="{% url 'accounts:user' %}">Мои заказы</a>
-  
+<p style="font-size: 22px;">Ваш заказ создался, его можно будет оплатить в течении 10 минут.</p>
+  <!-- <a href="https://oplata.qiwi.com/form/?invoice_uid={{ order.order_id }}" target="blank" class="button light">Ссылка на оплату</a> -->
+  <!-- <a href="{% url 'accounts:user' %}">Мои заказы</a> -->
+  <div class="btns" style="display: flex;">
+    <button style="margin-right: 10px;" class="button light"
+      onclick="window.open('https://oplata.qiwi.com/form/?invoice_uid={{ order.order_id }}', '_blank');">
+      Перейти к форме оплаты
+    </button>
+    <button class="button light_green" onclick="location.href=`{% url 'accounts:user' %}`">
+      Мои заказы
+    </button>
+  </div>
 {% endblock %}
