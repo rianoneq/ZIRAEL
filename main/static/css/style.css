@@ -690,18 +690,8 @@ object-fit: cover;
 }
 
 /* header burger styles */
- header  {
-   max-width: 1368px;
-   margin: 0 auto;
-   padding: 1rem 2rem;
- }
 
- header  .header {
-   min-height: 10vh;
-   display: flex;
-   align-items: center;
-   justify-content: space-between;
- }
+
 
 
 
@@ -723,24 +713,8 @@ object-fit: cover;
    position: relative;
  }
 
- header  .header .nav_links button {
-   border: none;
-   outline: none;
-   cursor: pointer;
-   padding: 0.75rem 1rem;
-   margin: 0 1rem;
-   border-radius: 6px;
-   background: transparent;
-   border: 2px solid #fff;
-   color: #fff;
-   font-weight: 500;
- }
 
- header  .header i {
-   display: none;
-   color: #fff;
-   cursor: pointer;
- }
+
 
 /* for burger exact icon */
 .menu-btn {
