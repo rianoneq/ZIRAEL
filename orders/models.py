@@ -41,7 +41,7 @@ class Order(models.Model):
     # присваиваются корректные значения стоимости заказа и количества товаров
 
     amount = self.total_price
-    lifetime = 20
+    lifetime = 10
     comment = f'buying {self.total_count} items in zirael shop'
 
     bill = create_bill(amount=amount,  

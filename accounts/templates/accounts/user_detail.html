@@ -27,7 +27,7 @@
                   <ul class="order_items">
                     {% for item in order.items.all %}
                     <li>
-                      <img style="height: 50px;width:50px;" src="/static/images/{{ item.product.image }}" alt="">
+                      <img style="height: 50px;width:50px;" src="{% if item.product.image %}/static/images/{{ item.product.image }}{% else %}/static/images/site_images/anon.png{% endif %}" alt="">
                       
                       x{{ item.quantity }}
                     </li>
@@ -35,13 +35,13 @@
                   </ul>
                 </td>
                 <td>{{ order.get_total_price }}₽</td>
-                <td>
+                <td class="order__status">
                   {% if order.status == "WA" %}
-                    <span style="color:orange">Ожидание</span>
+                    <span style="color:orange">Ожидает</span>
                   {% elif order.status == "EX" %}
-                    <span style="color:red">Истекло</span> 
+                    <span style="color:red">Истек</span> 
                   {% elif order.status == "PD" %}
-                    <span style="color:greenyellow">Оплачено</span> 
+                    <span style="color:greenyellow">Оплачен</span> 
                   {% endif %}
                 </td>
                 {% if order.status == "WA" %}
@@ -52,7 +52,7 @@
                     </button>
                     <button class="i_paid_order_button pay_button" style="position: relative;" data-order-id="{{ order.order_id }}">
                       <div class="error_msg"></div>
-                      Я оплатил
+                      Проверить статус
                     </button>
                   </div>
                 </td>
@@ -85,5 +85,5 @@
     </form>
   </div>
 
-    <script src="{% static 'js/user_page_scripts.js' %}"></script>
+    <script type="module" src="{% static 'js/user_page_scripts.js' %}"></script>
 {% endblock %}

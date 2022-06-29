@@ -1,11 +1,14 @@
 from django.http import JsonResponse
 from django.shortcuts import redirect, render
+
+from main.handlers import ajax_required
 from .models import OrderItem
 from .forms import OrderCreateForm
 from cart.cart import Cart
 from .models import Order, OrderItem
 from django.views import generic
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_protect
 
 # from .tasks import order_created
 
@@ -26,7 +29,6 @@ class OrderDetailView(generic.DetailView):
 def can_user_create_order(user):
     waiting_orders = Order.objects.filter(user=user).filter(status__exact='WA')
 
-    print(waiting_orders, len(waiting_orders))
     if len(waiting_orders) == 0:
         return True
 
@@ -77,7 +79,9 @@ def create(request):
         return redirect('cart:cart_detail')
 
 
-def check_order_status(request, bill_id):
+@ajax_required
+def check_order_status(request):
+    bill_id = request.POST.get('bill_id')
     statuses = {
         'PAID': 'PD',
         'EXPIRED': 'EX',
@@ -90,7 +94,8 @@ def check_order_status(request, bill_id):
 
     data = order.check_bill_status(order.bill_id)
     real_order_status = data['status']
-    
+
+        
     if not data:
         raise Exception('Похоже вы не оплатили, либо заказ уже истек')
     

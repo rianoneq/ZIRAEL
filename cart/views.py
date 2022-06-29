@@ -3,29 +3,34 @@ from django.views.decorators.http import require_POST
 from catalog.models import Product
 from .cart import Cart
 from django.http import JsonResponse
-# from django.db import transaction
+from main.handlers import ajax_required
 
-# @transaction.atomic
-# @ajax_required
-def cart_add(request, product_slug, quantity):
+@ajax_required
+def cart_add(request):
 
-    cart = Cart(request)
+  product_slug = request.POST.get('slug')
+  quantity = request.POST.get('quantity')
 
-    product = get_object_or_404(Product, slug=product_slug)
-    quantity = int(quantity)
-    total_count = cart.__len__()
+  cart = Cart(request)
+
+  product = get_object_or_404(Product, slug=str(product_slug))
+  quantity = int(quantity)
+  total_count = cart.__len__()
+  
+  if total_count + quantity > 10:
+    raise Exception('Слишком много предметов в корзине!')
     
-    if total_count + quantity > 10:
-      raise Exception('Слишком много предметов в корзине!')
-      
-    cart.add(product=product,
-             quantity=quantity,
-             update_quantity=False)
+  cart.add(product=product,
+            quantity=quantity,
+            update_quantity=False)
 
 
-    return JsonResponse({'success': True, 'data': {'total_count': (total_count + quantity)}}, safe=False)
+  return JsonResponse({'success': True, 'data': {'total_count': (total_count + quantity)}}, safe=False)
 
-def cart_remove(request, product_slug):
+@ajax_required
+def cart_remove(request):
+
+  product_slug = request.POST.get('slug')
   cart = Cart(request)
   product = get_object_or_404(Product, slug=product_slug)
   cart.remove(product)

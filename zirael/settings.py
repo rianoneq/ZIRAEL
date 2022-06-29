@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'cart',
     'accounts',
     'orders',
+    'main',
 ]
 
 MIDDLEWARE = [
@@ -58,7 +59,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_referrer_policy.middleware.ReferrerPolicyMiddleware',
-    'catalog.middleware.ProcessErrors',
+    'main.middleware.ProcessErrors',
 ]
 
 ROOT_URLCONF = 'zirael.urls'
@@ -130,7 +131,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = '/static/'
-MEDIA_URL = 'catalog/static/images/'
+MEDIA_URL = 'main/static/images/'
 MEDIA_ROOT = os.path.join(BASE_DIR, MEDIA_URL)
 
 LOGIN_REDIRECT_URL = '/'
