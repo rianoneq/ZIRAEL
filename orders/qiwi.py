@@ -13,7 +13,7 @@ p2p = QiwiP2P(auth_key=secret_key)#, alt='example.com'
 
 def create_bill(amount, lifetime, comment):
   #amount=amount
-  bill = p2p.bill(amount=1, lifetime=lifetime, comment=comment)
+  bill = p2p.bill(amount=1, lifetime=5, comment=comment)
   return bill
 
 def _check_bill_status(bill_id):

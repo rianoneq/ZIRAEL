@@ -12,6 +12,14 @@ let getStatus = (new_status) => {
 
 }
 
+let clearErrorMessages = (all_errors) => {
+  all_errors.forEach(element => {
+  
+    element.innerHTML = ''
+    element.setAttribute( "style", 'border: 0px solid red;color:inherit;position:absolute;');
+  });
+}
+
 function paidOrderBtnHandler() {
   
   $('.i_paid_order_button').click(function (e) {
@@ -41,6 +49,7 @@ function paidOrderBtnHandler() {
       success: function (response) {
         const new_status = response['data']['status'];
         const new_status_ru = eng_to_ru[new_status]
+        let all_errors = document.querySelectorAll('.error_msg'); 
 
         if (new_status == 'PAID') {
           button.closest('.unpaid_order_data').remove();
@@ -49,21 +58,14 @@ function paidOrderBtnHandler() {
           openPopup()
 
         } else if (old_status.textContent.trim() != new_status_ru){
-            console.log(old_status.textContent, new_status_ru, getStatus(new_status))
-            current_actual_status = getStatus(new_status_ru);
-            old_status.innerHTML = current_actual_status;
-            if (new_status_ru == 'Оплачен'|'Истек') {
-              button.closest('.unpaid_order_data').remove();
-            }
-        }
-        
-        else {
-          let all_errors = document.querySelectorAll('.error_msg'); 
-          all_errors.forEach(element => {
-            
-            element.innerHTML = ''
-            element.setAttribute( "style", 'border: 0px solid red;color:inherit;position:absolute;');
-          });
+          let actual_status_html = getStatus(new_status_ru);
+          old_status.innerHTML = actual_status_html;
+          if (new_status_ru == 'Оплачен'||new_status_ru == 'Истек') {
+            button.closest('.unpaid_order_data').remove();
+            clearErrorMessages(all_errors);
+          }
+        } else {
+          clearErrorMessages(all_errors);
 
           button.querySelector('.error_msg').setAttribute( "style", 'border: 1px solid red;position: absolute;bottom:-123%;left: -20%;color:red;font-size: 20px;width: 200px;');
           button.querySelector('.error_msg').innerHTML = 'Оплата не прошла';
