@@ -35,6 +35,7 @@ class CategoryDetailView(generic.DetailView):
 
 class ItemDetailView(generic.DetailView):
   model = Product
+
   def get_context_data(self, **kwargs):
 
     prod_ = Product.objects.filter(slug=self.kwargs['slug'])

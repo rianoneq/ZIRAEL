@@ -2,10 +2,16 @@
 
 
 {% block content %}
-<h2>Создать аккаунт</h2>
-<form method="post">
+<h1 style="color:var(--general-site-color)">Регистрация</h1>
+<p>Пожалуйста, заполните форму ниже:</p>
+
+<form action="." method="post">
+  {{ user_form.as_p }}
   {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit" class="button">Создать аккаунт</button>
+  <p><input type="submit" class="button light" value="Создать аккаунт"></p>
 </form>
+
+<div class="reg_" style="max-width: 210px;">
+  <a href="{% url 'accounts:login' %}" class="button">Залогиниться</a>
+</div>
 {% endblock %}

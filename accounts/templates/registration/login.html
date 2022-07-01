@@ -3,21 +3,25 @@
 
 {% block content %}
     <h1 style="color: var(--general-site-color);">Логин</h1>
-    {% if form.errors %}
-    <p>
-      Ваши данные неверны. Попробуйте снова.
-    </p>
+    {% if err %}
+      <p>
+        Ваши данные неверны. Попробуйте снова.
+      </p>
     {% else %}
-    <p>Пожалуйста, заполните форму ниже:</p>
+      <p>Пожалуйста, заполните форму ниже:</p>
     {% endif %}
     <div class="login-form">
-      <form action="{% url 'login' %}" method="post">
+    
+      <form action="." method="post">
         {{ form.as_p }}
         {% csrf_token %}
-        <input type="hidden" name="next" value="{{ next }}" />
-        <p><input type="submit" value="Войти" class="button"></p>
-      </form>
+        <p><input type="submit" value="Войти" class="button light"></p>
     </div>  
 
-  <a href="{% url 'accounts:singup' %}">Регистрация</a>
+    <div class="reg_" style="max-width: 200px;">
+       <a href="{% url 'accounts:signup' %}" class="button">Регистрация</a>
+
+    </div>
+
+</form>
 {% endblock %}

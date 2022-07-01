@@ -63,7 +63,6 @@ card_name.forEach(text => {
     max_length = 25
   }
   
-  console.log(max_length, text.innerHTML.length, text.innerHTML)
   if (text.innerHTML.trim().length > max_length) {
     let cutten_text = text.innerHTML.trim().slice(0,[max_length]);
     text.innerHTML = cutten_text.trim() + '...';

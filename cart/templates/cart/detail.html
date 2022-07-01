@@ -68,10 +68,10 @@
           Оформить VKID
         </button>
       {% else %}
-        <button id="create_order" style="margin-right: 10px;" class="button light" onclick="location.href=`{% url 'login' %}`">
+        <button id="create_order" style="margin-right: 10px;" class="button light" onclick="location.href=`{% url 'accounts:login' %}`">
           Необходима регистрация
         </button>
-        <!-- <a href="{% url 'login' %}" class="button" id="create_order">Необходима регистрация</a> -->
+        <!-- <a href="{% url 'accounts:login' %}" class="button" id="create_order">Необходима регистрация</a> -->
       {% endif %}
 
     {% endif %}
