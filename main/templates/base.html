@@ -58,7 +58,7 @@
               </div>
             </span> 
           {% else %}
-            <a href="{% url 'login' %}">login</a> 
+            <a href="{% url 'login' %}">login/reg</a> 
           {% endif %}
               <!-- intrestiong func, само подставляет окончание в зависимости от числа -->
               <!-- {{ total_items|pluralize }} -->
@@ -78,7 +78,7 @@
           <span class="page-links">
             <span class="page-current">
               {% if page_obj.has_previous %}
-                <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}" style="margin-right: 10px;">prev</a>
+                <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}" style="margin-right: 10px;">пред</a>
 
               {% endif %}
               <div class="pag_pages">
@@ -114,11 +114,11 @@
                   {% endwith %}
                 </div>
               {% if page_obj.has_next %}
-                <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">next</a>
+                <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">след</a>
               {% endif %}
               
             </span>
-              <div class="total_pages">total pages: {{ page_obj.paginator.num_pages }}</div>
+              <div class="total_pages">Всего страниц: {{ page_obj.paginator.num_pages }}</div>
           </span>
         </div>
       {% endif %}

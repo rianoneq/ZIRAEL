@@ -53,7 +53,9 @@ function paidOrderBtnHandler() {
 
         if (new_status == 'PAID') {
           button.closest('.unpaid_order_data').remove();
-          
+          let actual_status_html = getStatus('Оплачен');
+          old_status.innerHTML = actual_status_html;
+
           // call popup congrats here
           openPopup()
 

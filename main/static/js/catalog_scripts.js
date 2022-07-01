@@ -5,13 +5,13 @@ let images = document.querySelectorAll('img')
 card_description.forEach(text => {
   let max_length = 0
   if (window.innerWidth < 320) {
-    card_description.remove;
+    max_length = 70
   }
   if (window.innerWidth < 550) {
-    max_length = 10
+    max_length = 70
   }
-  else if (window.innerWidth < 600) {
-    max_length = 20
+  else if (window.innerWidth < 760) {
+    max_length = 70
   }
   else if (window.innerWidth < 1000) {
     max_length = 25
@@ -39,10 +39,10 @@ card_description.forEach(text => {
 card_name.forEach(text => {
   let max_length = 0
   if (window.innerWidth < 550) {
-    max_length = 10
+    max_length = 17
   }
   else if (window.innerWidth < 600) {
-    max_length = 10
+    max_length = 17
   }
   else if (window.innerWidth < 900) {
     max_length = 11

@@ -1,6 +1,11 @@
 import Swiper from 'https://unpkg.com/swiper@8/swiper-bundle.esm.browser.min.js'
 import getCookie from './js_funcs.js'
 
+// change value label to rus text
+let elem = $('#add_to_cart_form_ label:contains("Quantity:")')
+elem[0].innerHTML = 'Количество товара:'
+
+
 //slider
 let slide_images = document.querySelectorAll('.swiper-slide');
 if (slide_images.length > 2) {

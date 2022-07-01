@@ -418,6 +418,13 @@ object-fit: cover;
 
 
 /* cart styles */
+#add_product_to_cart_btn{
+  transition: .2s;
+}
+#add_product_to_cart_btn:hover{
+  border: 2px solid var(--office-site-color);
+  color: var(--office-site-color);
+}
 .cart_table{
   font-size: 25px;
   width: 100%;
@@ -782,7 +789,7 @@ object-fit: cover;
   }
   
    header  .header .nav_links {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     background-color: black;
