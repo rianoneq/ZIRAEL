@@ -17,3 +17,6 @@
 - full adaptive
 - authentication and viewing order history in user account
 - ssl protection
+
+## feedback
+telegram @rianone
