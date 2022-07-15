@@ -17,9 +17,9 @@
         </thead>
         <tbody>
             {% for order in orders %}
-              <tr class="cart_product" style="vertical-align: inherit; ">
+              <tr class="cart_product" data-order-id="{{order.id}}" style="vertical-align: inherit; ">
                 <td>
-                  <a href="{{ order.get_absolute_url }}">
+                  <a href="{{ order.get_absolute_url }}" class="order_link">
                     Заказ #{{ order.id }}
                   </a>
                 </td>
@@ -35,14 +35,17 @@
                   </ul>
                 </td>
                 <td>{{ order.get_total_price }}₽</td>
-                <td class="order__status">
+                <td class="order__status" data-status="{{order.status}}" >
                   {% if order.status == "WA" %}
                     <span style="color:orange">Ожидает</span>
                   {% elif order.status == "EX" %}
                     <span style="color:red">Истек</span> 
                   {% elif order.status == "PD" %}
                     <span style="color:greenyellow">Оплачен</span> 
+                  {% else %}
+                    <span style="color:red">Ошибка</span>
                   {% endif %}
+
                 </td>
                 {% if order.status == "WA" %}
                 <td class="unpaid_order_data">
@@ -50,10 +53,10 @@
                     <button class="pay_button" onclick="window.open('https://oplata.qiwi.com/form/?invoice_uid={{ order.order_id }}', '_blank');">
                       Перейти к форме оплаты
                     </button>
-                    <button class="i_paid_order_button pay_button" style="position: relative;" data-order-id="{{ order.order_id }}">
+                    <!-- <button class="i_paid_order_button pay_button" style="position: relative;" data-order-id="{{ order.order_id }}">
                       <div class="error_msg"></div>
                       Проверить статус
-                    </button>
+                    </button> -->
                   </div>
                 </td>
                 {% endif %}

@@ -12,7 +12,7 @@
     </li>
     {% endfor %}
   </ul>
-  <p>Total: {{ cart.get_total_price }}₽</p>
+  <p>Всего: {{ cart.get_total_price }}<span style="color:var(--officer-site-color)">₽</span></p>
 </div>
 <form action="." method="post" class="order-form">
   {{ form.as_p }}

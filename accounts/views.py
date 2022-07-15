@@ -5,10 +5,7 @@ from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from orders.models import Order
 from .forms import LoginForm
-from django.contrib.auth.forms import UserCreationForm
-from django.urls import reverse_lazy
-from django.views import generic
-from django import forms
+
 from django.contrib.auth.models import User
 
 def user_login(request):
@@ -43,6 +40,25 @@ def user_logout(request):
 @login_required
 def user_data(request):
   orders = Order.objects.filter(user=request.user)
+
+  statuses = {
+        'PAID': 'PD',
+        'EXPIRED': 'EX',
+        'WAITING': 'WA',
+        'REJECTED': 'RE'
+    }
+
+  # get waiting orders
+  waiting_orders = [order for order in orders if order.status=='WA']
+
+  # check is order status is still waiting
+  # if not update data in db
+  for waiting_order in waiting_orders:
+    real_status = waiting_order.check_bill_status(waiting_order.bill_id)
+    real_status_short = statuses[real_status['status']]
+    if real_status_short != waiting_order.status:
+      waiting_order.status = real_status_short
+
   return render(request, 'accounts/user_detail.html', {'orders': orders, 'page_title': f'Страница юзера {request.user}'})
 
 from .forms import LoginForm, UserRegistrationForm

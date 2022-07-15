@@ -419,11 +419,12 @@ object-fit: cover;
 
 /* cart styles */
 #add_product_to_cart_btn{
+  margin-top: 7px;
   transition: .2s;
 }
 #add_product_to_cart_btn:hover{
-  border: 2px solid var(--office-site-color);
-  color: var(--office-site-color);
+  border: 3px solid var(--officer-site-color);
+  color: var(--officer-site-color);
 }
 .cart_table{
   font-size: 25px;
@@ -513,6 +514,11 @@ object-fit: cover;
   padding: 7px;
 }
 
+/* order styles */
+.order_link:hover{
+  color: var(--general-site-color);
+}
+
 /* user acc popup styles */
 /* Важная часть */
 .popup{
@@ -553,6 +559,8 @@ object-fit: cover;
   transition: all .2s ease-in-out;
   transition: 0.5s all;
 }
+
+
 
 /* Далее код для стилизации формы */
 .close-popup {
@@ -638,16 +646,30 @@ object-fit: cover;
 
 @media screen and (max-width: 1200px) {
   .top_bar_content{
-    flex-direction: column;
+    flex-direction: column-reverse;
+  }
+  .item__text_data{
+    margin-left: 0;
+    max-width: 100%;
   }
   .wrap_slider{
-    max-width: 80%;
+    flex-direction: column;
+    margin-top: 10px;
+    max-width: 85%;
   }
   .header>ul{
     font-size: 21px;
   }
   .ava_main{
     height: 30px;
+  }
+  .swiper-thumbs{
+    display: flex !important;
+    margin: 0 !important;
+  }
+  .mySwiper>div{
+    flex-direction: row !important;
+    
   }
   .me_gropdown{
     bottom: -45px;

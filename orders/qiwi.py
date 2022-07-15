@@ -6,14 +6,14 @@ from dotenv import load_dotenv
 import os
 
 load_dotenv()
-secret_key = os.getenv('secret_qiwi_key')
+secret_key = os.getenv('secret_qiwi_key_')
 
 
 p2p = QiwiP2P(auth_key=secret_key)#, alt='example.com'
 
 def create_bill(amount, lifetime, comment):
   #amount=amount
-  bill = p2p.bill(amount=1, lifetime=5, comment=comment)
+  bill = p2p.bill(amount=1, lifetime=10, comment=comment)
   return bill
 
 def _check_bill_status(bill_id):

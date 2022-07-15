@@ -29,7 +29,7 @@ class OrderDetailView(generic.DetailView):
 def can_user_create_order(user):
     waiting_orders = Order.objects.filter(user=user).filter(status__exact='WA')
 
-    if len(waiting_orders) == 0:
+    if len(waiting_orders) < 4:
         return True
 
     return False
@@ -106,3 +106,11 @@ def check_order_status(request):
     return JsonResponse({
         'data': data
     })
+
+@ajax_required
+def get_order_data(request):
+    order_id = request.POST.get('order_id')
+    order = Order.objects.filter(id=order_id).first()
+    
+    return JsonResponse({'success': True, 'data': {'order_status': order.status}}, safe=False)
+    

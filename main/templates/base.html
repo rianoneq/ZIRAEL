@@ -54,7 +54,7 @@
               </svg>
               <div class="me_gropdown">
                 <a href="{% url 'accounts:user' %}" class="me_account">{{ user.username }}</a>
-                <a href="{% url 'logout' %}?next={{request.path}}" class="me_logout">logout</a>
+                <a href="{% url 'logout' %}?next={{request.path}}" class="me_logout">Выйти</a>
               </div>
             </span> 
           {% else %}
@@ -103,7 +103,7 @@
                       {{ page }}
                     </a>
                   </div>
-                  {# qew #}
+                  
                   <div class="pag_after_current pag_item">
                     {% if page != page_obj.paginator.num_pages %}
                       <a href="?page={{ page|add:'+1' }}">

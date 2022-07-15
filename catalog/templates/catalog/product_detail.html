@@ -91,7 +91,7 @@
           <form id="add_to_cart_form_" onsubmit="return false" method="post">
             {{ cart_product_form }}
             {% csrf_token %}
-            <input data-slug="{{ product.slug }}" type="submit" id="add_product_to_cart_btn" value="Add to cart">
+            <input data-slug="{{ product.slug }}" type="submit" id="add_product_to_cart_btn" class="button" value="В корзину">
           </form>
 
         </div>

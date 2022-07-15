@@ -28,14 +28,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['localhost']
 
 CART_SESSION_ID = 'cart'
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -59,7 +58,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_referrer_policy.middleware.ReferrerPolicyMiddleware',
-    'main.middleware.ProcessErrors',
+    #'main.middleware.ProcessErrors',
 ]
 
 ROOT_URLCONF = 'zirael.urls'
@@ -131,6 +130,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = 'main/static/'
 MEDIA_URL = 'main/static/images/'
 MEDIA_ROOT = os.path.join(BASE_DIR, MEDIA_URL)
 
@@ -139,13 +139,6 @@ LOGOUT_REDIRECT_URL = '/'
 LOGIN_URL = reverse_lazy('login')
 LOGOUT_URL = reverse_lazy('logout')
 
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-# EMAIL_HOST = 'sftp.hushmail.com'
-# EMAIL_HOST_USER = 'admin@zirael.com'
-# # EMAIL_HOST_PASSWORD = 'zxczxc'
-# EMAIL_PORT = 587
-# EMAIL_USE_TLS = True
-# EMAIL_USE_SSL = False
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

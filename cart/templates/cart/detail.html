@@ -45,7 +45,7 @@
         {% endfor %}
           <tr class="total" style="margin-top: 20px;">
 
-            <td>Total</td>
+            <td>Всего</td>
             <td class="total_price" style="display: flex;">{{ cart.get_total_price }}<div class="currency"
                 style="color:var(--officer-site-color);">₽</div>
             </td>
@@ -65,7 +65,7 @@
       {% if request.user.is_authenticated %}
         <button id="create_order" style="margin-right: 10px;" class="button"
           onclick="location.href=`{% url 'order:create' %}`">
-          Оформить VKID
+          Оформить заказ
         </button>
       {% else %}
         <button id="create_order" style="margin-right: 10px;" class="button light" onclick="location.href=`{% url 'accounts:login' %}`">
