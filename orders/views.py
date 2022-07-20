@@ -29,7 +29,7 @@ class OrderDetailView(generic.DetailView):
 def can_user_create_order(user):
     waiting_orders = Order.objects.filter(user=user).filter(status__exact='WA')
 
-    if len(waiting_orders) < 4:
+    if len(waiting_orders) < 2:
         return True
 
     return False
@@ -70,7 +70,8 @@ def create(request):
                         return render(request, 'orders/created.html',
                                     {'order': order, 'page_title': 'Заказ успешно создан!'})
             else:
-                return render(request, 'orders/create.html',{'form':form, 'errors': ['У Вас уже висит 1 неоплаченный заказ. Пока он не истечет или не будет оплачен, вы не сможете создавать другие.']})
+                return render(request, 'orders/create.html',{'form':form, 'errors': ['У Вас уже висит слишком много неоплаченных заказ. Пока он не истечет или не будет оплачен, вы не сможете создавать другие.'],
+                'page_title': 'Создание заказа...'})
         else:
             form = OrderCreateForm
         return render(request, 'orders/create.html',

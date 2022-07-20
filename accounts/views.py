@@ -58,6 +58,7 @@ def user_data(request):
     real_status_short = statuses[real_status['status']]
     if real_status_short != waiting_order.status:
       waiting_order.status = real_status_short
+      Order.objects.filter(id=waiting_order.id).update(status=real_status_short)
 
   return render(request, 'accounts/user_detail.html', {'orders': orders, 'page_title': f'Страница юзера {request.user}'})
 

@@ -11,7 +11,7 @@ card_description.forEach(text => {
     max_length = 70
   }
   else if (window.innerWidth < 760) {
-    max_length = 70
+    max_length = 40
   }
   else if (window.innerWidth < 1000) {
     max_length = 25
@@ -42,7 +42,7 @@ card_name.forEach(text => {
     max_length = 17
   }
   else if (window.innerWidth < 600) {
-    max_length = 17
+    max_length = 14
   }
   else if (window.innerWidth < 900) {
     max_length = 11

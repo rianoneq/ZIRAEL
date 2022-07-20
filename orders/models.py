@@ -70,9 +70,11 @@ class Order(models.Model):
     raise Exception('Незвестная ошибка')
 
   def save(self, *args, **kwargs):
-    data = self.get_order_data()
-    self.order_id = data['order_id']
-    self.bill_id = data['bill_id']
+    if not self.order_id and \
+       not self.bill_id:
+      data = self.get_order_data()
+      self.order_id = data['order_id']
+      self.bill_id = data['bill_id']
     super(Order, self).save(*args, **kwargs)
 
   class Meta:
