@@ -1,4 +1,4 @@
-# [ZIRAEL](https://zirael.shop/)
+# [ZIRAEL](https://zirael.shop/)(vps expired D:)
 
 #### My first django eccomerce site called ZIRAEL. It's a store where you can buy models of weapons & armor & accessories from games/movies/serials etc.
 
